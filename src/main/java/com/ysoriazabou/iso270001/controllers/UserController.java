@@ -1,0 +1,55 @@
+package com.ysoriazabou.iso270001.controllers;
+import com.ysoriazabou.iso270001.entities.UserEntity;
+import com.ysoriazabou.iso270001.logic.interfaces.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@CrossOrigin("*")
+@RestController
+@RequestMapping("/user")
+public class UserController {
+
+    private final UserService userService;
+    @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<UserEntity>> findAll(){
+
+        return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping("/findbyid/{id}")
+    public ResponseEntity<UserEntity> findByid(@PathVariable long id){
+        return ResponseEntity.ok().body(userService.findById(id));
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<UserEntity> save(@RequestBody UserEntity userEntity){
+         userService.save(userEntity);
+          return ResponseEntity.ok().body(userEntity);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> delete(@PathVariable long id){
+         return ResponseEntity.ok().body( userService.deleteById(id));
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<UserEntity> update(@PathVariable long id, @RequestBody UserEntity userEntity){
+        UserEntity userExist = userService.findById(id);
+        userExist.setNom(userEntity.getNom());
+        userExist.setPrenom(userEntity.getPrenom());
+        userExist.setEmail(userEntity.getEmail());
+        userExist.setPassword(userEntity.getPassword());
+        userExist.setAdress(userEntity.getAdress());
+        userExist.setPhoneNumber(userEntity.getPhoneNumber());
+        userExist.setType(userEntity.getType());
+        userService.save(userExist);
+        return ResponseEntity.ok().body(userExist);
+    }
+}

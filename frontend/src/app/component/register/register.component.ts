@@ -10,15 +10,17 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
+  typeOfUser=['admin','user','customer','customerUser'];
   registerform = this.builder.group({
-    id: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(5)])),
+    phone: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(8)])),
     name: this.builder.control('', Validators.required),
+    adress: this.builder.control(''),
+    surname: this.builder.control('', Validators.required),
     password: this.builder.control('', Validators.compose([Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')])),
     email: this.builder.control('', Validators.compose([Validators.required, Validators.email])),
     gender: this.builder.control('male'),
-    role: this.builder.control(''),
-    isactive: this.builder.control(false)
+    typeOfUser: this.builder.control(''),
+    activeAccount: this.builder.control(true)
   });
 
   constructor(
@@ -30,11 +32,12 @@ export class RegisterComponent {
 
   }
 
+
   proceedregister() {
     if (this.registerform.valid) {
-      this.service.RegisterUser(this.registerform.value).subscribe(result => {
-        this.toastr.success('Please contact admin for enable access.', 'Registered successfully')
-        this.router.navigate(['login'])
+      console.log(this.registerform.value);
+      this.service.RegisterUser(this.registerform.value).subscribe(() => {
+        this.router.navigate([''])
       });
     } else {
       this.toastr.warning('Please enter valid data.')

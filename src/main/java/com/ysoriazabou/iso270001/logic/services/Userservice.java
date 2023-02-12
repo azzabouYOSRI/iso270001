@@ -47,10 +47,12 @@ public class Userservice implements UserService{
        return  userEntityRepository.findAll();
     }
 
+
     @Override
     @Transactional
     public UserEntity findByEmail(String email) {
-        return userEntityRepository.findUserEntityByEmail(email);
+        Optional<UserEntity> optionalUser = Optional.ofNullable(userEntityRepository.findUserEntityByEmail(email));
+        return optionalUser.orElse(new UserEntity());
     }
 
 

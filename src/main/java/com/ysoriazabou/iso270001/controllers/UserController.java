@@ -1,14 +1,16 @@
 package com.ysoriazabou.iso270001.controllers;
+
 import com.ysoriazabou.iso270001.entities.UserEntity;
 import com.ysoriazabou.iso270001.logic.interfaces.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
-@CrossOrigin("*")
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -47,13 +49,13 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<UserEntity> update(@PathVariable long id, @RequestBody UserEntity userEntity){
         UserEntity userExist = userService.findById(id);
-        userExist.setNom(userEntity.getNom());
-        userExist.setPrenom(userEntity.getPrenom());
+        userExist.setName(userEntity.getName());
+        userExist.setSurname(userEntity.getSurname());
         userExist.setEmail(userEntity.getEmail());
         userExist.setPassword(userEntity.getPassword());
         userExist.setAdress(userEntity.getAdress());
-        userExist.setPhoneNumber(userEntity.getPhoneNumber());
-        userExist.setType(userEntity.getType());
+        userExist.setPhone(userEntity.getPhone());
+        userExist.setTypeOfUser(userEntity.getTypeOfUser());
         userExist.setActiveAccount(userEntity.getActiveAccount());
         userService.save(userExist);
         return ResponseEntity.ok().body(userExist);

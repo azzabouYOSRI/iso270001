@@ -11,28 +11,32 @@ export class AuthService {
 constructor(private http:HttpClient) {
 
   }
-  apiurl='http://localhost:8080/user';
-
+  // private apiUrlAuth=environment.apiUrl+'/user';
+apiUrlAuth='http://localhost:8080/user';
   getAllUser():Observable<User[]>{
-    return this.http.get<User[]>(this.apiurl);
+    return this.http.get<User[]>(this.apiUrlAuth+'/all');
   }
   RegisterUser(inputdata:any){
-    return this.http.post(this.apiurl,inputdata)
+    return this.http.post(this.apiUrlAuth+'/save',inputdata)
   }
 
   GetUserbyEmail(email: String | null | undefined):Observable<User>{
-    return this.http.get<User>(this.apiurl+'/findbyemail/'+email);
+    return this.http.get<User>(this.apiUrlAuth+'/findbyemail/'+email);
   }
-  updateuser(id:any,inputdata:any){
-    return this.http.put(this.apiurl+'/'+id,inputdata);
+
+  GetUserbyId(id:number):Observable<User>{
+    return this.http.get<User>(this.apiUrlAuth+'/find/'+id);
+  }
+  updateuser(id:number,inputdata:JSON){
+    return this.http.put(this.apiUrlAuth+'/'+id,inputdata);
   }
   getuserrole(){
     return this.http.get('http://localhost:3000/role');
   }
   isloggedin(){
-    return sessionStorage.getItem('username')!=null;
+    return sessionStorage.getItem('userid')!=null;
   }
   getrole(){
-    return sessionStorage.getItem('role')!=null?sessionStorage.getItem('role')?.toString():'';
+    return sessionStorage.getItem('type')!=null?sessionStorage.getItem('type')?.toString():'';
   }
 }

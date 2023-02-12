@@ -21,4 +21,5 @@ export  interface User {
 
   activeAccount: boolean;
 
+  gender:String;
 }

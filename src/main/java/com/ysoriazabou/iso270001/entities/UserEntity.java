@@ -2,6 +2,8 @@ package com.ysoriazabou.iso270001.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Builder
 @AllArgsConstructor
@@ -16,20 +18,20 @@ public class UserEntity {
     @Column(name = "idu", nullable = false)
     private long idu;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    @Column(name = "type_of_user", nullable = false)
+    private String typeOfUser;
 
-    @Column(name = "nom", nullable = false)
-    private String nom;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "prenom", nullable = false)
-    private String prenom;
+    @Column(name = "surname", nullable = false)
+    private String surname;
 
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "phone_number", nullable = false)
-    private int phoneNumber;
+    @Column(name = "phone", nullable = false)
+    private String phone;
 
     @Column(name = "password", nullable = false)
     private String password;
@@ -37,10 +39,14 @@ public class UserEntity {
     @Column(name = "adress")
     private String adress;
 
-    @Column(name = "active_account",nullable = false)
-    private boolean ActiveAccount;
+    @Column(name = "active_account", nullable = false)
+    @JdbcTypeCode(SqlTypes.BOOLEAN)
+    private boolean activeAccount;
+
+    @Column(name = "gender", nullable = false)
+    private String gender;
 
     public boolean getActiveAccount() {
-       return this.ActiveAccount;
+       return this.activeAccount;
     }
 }

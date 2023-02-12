@@ -143,18 +143,18 @@ button.toast-close-button {
   background-color: #030303;
   pointer-events: auto;
 }
-.toast-success {
-  background-color: #51A351;
-}
-.toast-error {
-  background-color: #BD362F;
-}
-.toast-info {
-  background-color: #2F96B4;
-}
-.toast-warning {
-  background-color: #F89406;
-}
+/*.toast-success {*/
+/*  background-color: #51A351;*/
+/*}*/
+/*.toast-error {*/
+/*  background-color: #BD362F;*/
+/*}*/
+/*.toast-info {*/
+/*  background-color: #2F96B4;*/
+/*}*/
+/*.toast-warning {*/
+/*  background-color: #F89406;*/
+/*}*/
 .toast-progress {
   position: absolute;
   left: 0;

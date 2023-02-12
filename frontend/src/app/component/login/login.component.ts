@@ -29,17 +29,14 @@ export class LoginComponent {
   proceedlogin() {
     if (this.loginform.valid) {
       this.service.GetUserbyEmail(this.loginform.value.email).subscribe(item => {
-          console.log(item);
           this.result = item;
           console.log(this.result);
 
-          if (this.result == null) {
-            this.toastr.error('Invalid credentials');
-          } else {
+
             if (this.result.password === this.loginform.value.password) {
               if (this.result.activeAccount) {
                 sessionStorage.setItem('userid', this.result.id);
-                sessionStorage.setItem('type', 'admin');
+                sessionStorage.setItem('type', this.result.type);
                 this.router.navigate(['']);
               } else {
                 this.toastr.error('Please contact Admin', 'InActive User');
@@ -47,7 +44,7 @@ export class LoginComponent {
             } else {
               this.toastr.error('Invalid credentials');
             }
-          }
+
         },
         (error: any) => {
           console.log(error);

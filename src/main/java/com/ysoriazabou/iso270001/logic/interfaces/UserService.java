@@ -14,9 +14,12 @@ public interface UserService
     String deleteById(long id);
 
     @Transactional
-    UserEntity findById(long userEntity);
+    UserEntity findById(long id);
 
     @Transactional
     List<UserEntity> findAll();
+
+    @Transactional
+    UserEntity findByEmail(String email);
 
 }

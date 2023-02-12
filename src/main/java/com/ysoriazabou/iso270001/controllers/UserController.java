@@ -39,6 +39,11 @@ public class UserController {
          return ResponseEntity.ok().body( userService.deleteById(id));
     }
 
+    @GetMapping("/findbyemail/{email}")
+    public ResponseEntity<UserEntity> findByEmail(@PathVariable String email){
+        return ResponseEntity.ok().body(userService.findByEmail(email));
+    }
+
     @PutMapping("/update/{id}")
     public ResponseEntity<UserEntity> update(@PathVariable long id, @RequestBody UserEntity userEntity){
         UserEntity userExist = userService.findById(id);
@@ -49,6 +54,7 @@ public class UserController {
         userExist.setAdress(userEntity.getAdress());
         userExist.setPhoneNumber(userEntity.getPhoneNumber());
         userExist.setType(userEntity.getType());
+        userExist.setActiveAccount(userEntity.getActiveAccount());
         userService.save(userExist);
         return ResponseEntity.ok().body(userExist);
     }

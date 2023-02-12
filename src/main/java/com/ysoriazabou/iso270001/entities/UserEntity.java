@@ -37,4 +37,10 @@ public class UserEntity {
     @Column(name = "adress")
     private String adress;
 
+    @Column(name = "active_account",nullable = false)
+    private boolean ActiveAccount;
+
+    public boolean getActiveAccount() {
+       return this.ActiveAccount;
+    }
 }

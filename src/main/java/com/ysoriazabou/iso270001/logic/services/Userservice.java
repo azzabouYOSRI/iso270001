@@ -47,6 +47,14 @@ public class Userservice implements UserService{
        return  userEntityRepository.findAll();
     }
 
+    @Override
+    @Transactional
+    public UserEntity findByEmail(String email) {
+        return userEntityRepository.findUserEntityByEmail(email);
+    }
+
+
+
 
 
 

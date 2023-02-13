@@ -14,6 +14,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import {MaterialModule} from "../material.module";
+import { NavBarComponent } from './component/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MaterialModule} from "../material.module";
     LoginComponent,
     RegisterComponent,
     UserComponent,
-    UpdatePopupComponent
+    UpdatePopupComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

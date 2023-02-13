@@ -9,6 +9,7 @@ import {MatSortModule} from "@angular/material/sort"
 import {MatDialogModule} from "@angular/material/dialog"
 import {MatSelectModule} from "@angular/material/select"
 import {MatCheckboxModule} from "@angular/material/checkbox"
+import {MatToolbarModule} from "@angular/material/toolbar";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox"
         MatSortModule,
         MatDialogModule,
         MatSelectModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatToolbarModule
     ]
 })
 export class MaterialModule { }

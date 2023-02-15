@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -20,12 +19,14 @@ public class UserController {
     }
 
     @GetMapping("/all")
+
     public ResponseEntity<List<UserEntity>> findAll(){
 
         return ResponseEntity.ok(userService.findAll());
     }
 
     @GetMapping("/findbyid/{id}")
+
     public ResponseEntity<UserEntity> findByid(@PathVariable long id){
         return ResponseEntity.ok().body(userService.findById(id));
     }

@@ -10,6 +10,14 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
+    constructor(
+    private builder: FormBuilder,
+    private service: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {}
+
   typeOfUser=['admin','user','customer','customerUser'];
   registerform = this.builder.group({
     phone: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(8)])),
@@ -23,17 +31,10 @@ export class RegisterComponent {
     activeAccount: this.builder.control(true)
   });
 
-  constructor(
-    private builder: FormBuilder,
-    private service: AuthService,
-    private router: Router,
-    private toastr: ToastrService
-  ) {
-
-  }
 
 
-  proceedregister() {
+
+  proceedRegister() {
     if (this.registerform.valid) {
       console.log(this.registerform.value);
       this.service.RegisterUser(this.registerform.value).subscribe(() => {

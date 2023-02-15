@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../models/user";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class AuthService {
 constructor(private http:HttpClient) {
 
   }
-  // private apiUrlAuth=environment.apiUrl+'/user';
-apiUrlAuth='http://localhost:8080/user';
+  private apiUrlAuth=environment.apiUrl+'/user';
+// apiUrlAuth='http://localhost:8080/user';
   getAllUser():Observable<User[]>{
     return this.http.get<User[]>(this.apiUrlAuth+'/all');
   }
@@ -24,19 +25,14 @@ apiUrlAuth='http://localhost:8080/user';
     return this.http.get<User>(this.apiUrlAuth+'/findbyemail/'+email);
   }
 
-  GetUserbyId(id:number):Observable<User>{
-    return this.http.get<User>(this.apiUrlAuth+'/find/'+id);
+  GetUserbyId(id: any):Observable<User>{
+    return this.http.get<User>(this.apiUrlAuth+'/findbyid/'+id);
   }
-  updateuser(id:number,inputdata:JSON){
-    return this.http.put(this.apiUrlAuth+'/'+id,inputdata);
-  }
-  getuserrole(){
-    return this.http.get('http://localhost:3000/role');
+
+  updateuser(id: any, inputdata:  any){
+    return this.http.put(this.apiUrlAuth+'/update/'+id,inputdata);
   }
   isloggedin(){
     return sessionStorage.getItem('userid')!=null;
-  }
-  getrole(){
-    return sessionStorage.getItem('type')!=null?sessionStorage.getItem('type')?.toString():'';
   }
 }

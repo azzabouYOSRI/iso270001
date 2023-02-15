@@ -1,25 +1,24 @@
 export  interface User {
-   idu: number;
-
-
-  phone: number;
+   idu: String;
 
   name: string;
 
   surname: string;
 
+  email: string;
 
   password: string;
 
   typeOfUser: string;
 
+    phone: number;
+
+
   adress: string;
 
-  type: string;
+    gender:String;
 
-  email: string;
 
   activeAccount: boolean;
 
-  gender:String;
 }

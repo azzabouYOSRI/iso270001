@@ -26,7 +26,7 @@ export class LoginComponent {
     sessionStorage.clear();
   }
 
-  proceedlogin() {
+  proceedLogin() {
     if (this.loginform.valid) {
       this.service.GetUserbyEmail(this.loginform.value.email).subscribe(item => {
           this.result = item;
@@ -45,13 +45,6 @@ export class LoginComponent {
               this.toastr.error('Invalid credentials');
             }
 
-        },
-        (error: any) => {
-          console.log(error);
-          this.toastr.error('something went wrong');
-        },
-        () => {
-          console.log('loading users completed');
         }
       );
     } else {

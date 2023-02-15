@@ -5,9 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
-import {RouterModule} from "@angular/router";
 import { RegisterComponent } from './component/register/register.component';
-import { UserComponent } from './component/user/user.component';
 import { UpdatePopupComponent } from './component/update-popup/update-popup.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {HttpClientModule} from "@angular/common/http";
@@ -15,6 +13,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
 import {MaterialModule} from "../material.module";
 import { NavBarComponent } from './component/nav-bar/nav-bar.component';
+import { UserListingComponent } from './component/user-listing/user-listing.component';
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -22,9 +22,9 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent,
     UpdatePopupComponent,
-    NavBarComponent
+    NavBarComponent,
+    UserListingComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +33,8 @@ import { NavBarComponent } from './component/nav-bar/nav-bar.component';
     ReactiveFormsModule,
     MaterialModule,
     HttpClientModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

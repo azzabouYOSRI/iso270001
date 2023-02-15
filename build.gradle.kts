@@ -30,12 +30,16 @@ dependencies {
     implementation("de.codecentric:spring-boot-admin-starter-server")
     implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
     implementation("org.springframework:spring-web:6.0.3")
+    implementation("org.springframework:spring-webmvc:6.0.3")
+    implementation("org.joinfaces:tomcat-spring-boot-starter:4.7.8")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.mysql:mysql-connector-j")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+
 
 
 }

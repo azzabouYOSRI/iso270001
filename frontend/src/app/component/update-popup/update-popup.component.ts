@@ -13,9 +13,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 })
 export class UpdatePopupComponent implements OnInit {
   private user: any;
-
-
-
+  private idx: any;
   constructor(
     private builder: FormBuilder,
     private service: AuthService,
@@ -26,10 +24,9 @@ export class UpdatePopupComponent implements OnInit {
   ) {
 
   }
-idx: any;
 
-  typeOfUser = ['admin', 'user', 'customer', 'customerUser'];
-     registerform = this.builder.group({
+  typeOfUser = ['admin', 'employee', 'customer', 'customerUser'];
+     updateForm = this.builder.group({
       phone: this.builder.control(''),
       name: this.builder.control(''),
       adress: this.builder.control(''),
@@ -42,7 +39,7 @@ idx: any;
      });
 
   proceedUpdate() {
-   this.service.updateuser(this.idx, this.registerform.value).subscribe(() => {
+   this.service.updateuser(this.idx, this.updateForm.value).subscribe(() => {
       this.toastr.success('Updated successfully.');
       this.dialogref.close();
     });
@@ -52,7 +49,7 @@ loadUserData(idu: any) {
     this.service.GetUserbyId(idu).subscribe
     (res => {
       this.user = res
-      this.registerform.patchValue({
+      this.updateForm.patchValue({
         phone: this.user.phone,
         name: this.user.name,
         adress: this.user.adress,
@@ -62,9 +59,7 @@ loadUserData(idu: any) {
         activeAccount: this.user.activeAccount,
         gender: this.user.gender,
         password: this.user.password,
-      });
-
-  });
+      });});
     console.log(this.idx)
 }
 
@@ -81,24 +76,5 @@ loadUserData(idu: any) {
       this.loadUserData(this.data.idu);
     }
   }
-//
-//   registerform = this.builder.group({
-//     id: this.builder.control(''),
-//     name: this.builder.control(''),
-//     password: this.builder.control(''),
-//     email: this.builder.control(''),
-//     gender: this.builder.control('male'),
-//     role: this.builder.control('', Validators.required),
-//     isactive: this.builder.control(false)
-//   });
-//
-//
-//   UpdateUser() {
-//     this.service.updateuser(this.registerform.value.id, this.registerform.value).subscribe(res => {
-//       this.toastr.success('Updated successfully.');
-//       this.dialogref.close();
-//     });
-//   }
-//
-// }
+
 }

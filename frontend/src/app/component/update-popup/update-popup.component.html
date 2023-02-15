@@ -3,7 +3,7 @@
         <h2>User update</h2>
     </mat-card-header>
     <mat-card-content>
-        <form class="example-form" [formGroup]="registerform" (ngSubmit)="proceedUpdate()">
+        <form class="example-form" [formGroup]="updateForm" (ngSubmit)="proceedUpdate()">
             <mat-form-field class="example-full-width">
               <mat-label>email</mat-label>
               <input matInput formControlName="email" >
@@ -37,8 +37,8 @@
           </mat-form-field>
           <br>
               <mat-radio-group formControlName="gender" aria-label="Select an option">
-                <mat-radio-button value="male">Male</mat-radio-button>
-                <mat-radio-button value="female">Female</mat-radio-button>
+                <mat-radio-button  name="gender" value="male">Male</mat-radio-button>
+                <mat-radio-button  name="gender" value="female">Female</mat-radio-button>
               </mat-radio-group>
           <div>
             <mat-checkbox formControlName="activeAccount" class="example-margin">Active Account</mat-checkbox>

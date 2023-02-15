@@ -18,7 +18,7 @@ export class RegisterComponent {
     private toastr: ToastrService
   ) {}
 
-  typeOfUser=['admin','user','customer','customerUser'];
+  typeOfUser=['admin','employee','customer','customerUser'];
   registerform = this.builder.group({
     phone: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(8)])),
     name: this.builder.control('', Validators.required),

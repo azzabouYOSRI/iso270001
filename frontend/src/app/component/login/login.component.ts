@@ -28,6 +28,7 @@ export class LoginComponent {
 
   proceedLogin() {
     if (this.loginform.valid) {
+      console.log(this.loginform.value.email);
       this.service.GetUserbyEmail(this.loginform.value.email).subscribe(item => {
           this.result = item;
           console.log(this.result);

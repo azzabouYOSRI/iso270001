@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../../models/user";
-import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +11,8 @@ export class AuthService {
 constructor(private http:HttpClient) {
 
   }
-  private apiUrlAuth=environment.apiUrl+'/user';
-// apiUrlAuth='http://localhost:8080/user';
+  // private apiUrlAuth=environment.apiUrl+'/user';
+apiUrlAuth='http://localhost:8080/user';
   getAllUser():Observable<User[]>{
     return this.http.get<User[]>(this.apiUrlAuth+'/all');
   }

@@ -1,0 +1,72 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2>{{title}}</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="projectForm" (ngSubmit)="formControl()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" >
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Budget</mat-label>
+              <input matInput type="text" name="budget" formControlName="budget" (keydown)="this.operations.keyPress($event)">
+<!--                <mat-error *ngIf="this.projectForm.controls.budget">test123</mat-error>-->
+
+              </mat-form-field>
+
+                <mat-form-field appearance="fill" class="fit-width spacer">
+                  <mat-label>Choose the starting date</mat-label>
+                  <input [formControl]="stardate2" matInput  [matDatepicker]="picker">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="fill" class="fit-width">
+                  <mat-label> end date</mat-label>
+                  <input [formControl]="endDate2" matInput  [matDatepicker]="picker2">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker2" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 startView="year" ></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="fit-width spacer">
+                  <mat-label> real starting date</mat-label>
+                  <input [formControl]="realStartDate2" matInput  [matDatepicker]="picker3">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker3" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker3 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="fit-width">
+                  <mat-label>real end date</mat-label>
+                  <input [formControl]="realEndDate2" matInput  [matDatepicker]="picker4">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker4" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker4 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Client </mat-label>
+              <mat-select (selectionChange)="onOptionSelected($event)" formControlName="client" panelClass="'my-custom-panel'">
+                <mat-option
+                  *ngFor="let companyName of companyNames" [value]="companyName" > {{companyName}}
+<!--                      <input matInput placeholder="Search..." [(ngModel)]="searchTerm" (input)="filterOptions()">-->
+
+                </mat-option>
+
+              </mat-select>
+          </mat-form-field>
+
+              <div>
+                <button mat-raised-button color="primary">Submit</button></div>
+          </form>
+    </mat-card-content>
+  </mat-card>

@@ -1,0 +1,32 @@
+   .content {
+    display: flex;
+    /*margin: 82px auto 32px;*/
+    padding: 0 16px;
+    /*width: 1%;*/
+    flex-direction: column;
+    /*align-items: center;*/
+  }
+.align{
+display:flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+}
+.mat-progress-bar {
+  height: 20px;
+  margin-top: 5px;
+  border-radius: 10px
+}
+
+.mat-progress-bar-fill::after {
+  background-color: #007bff;
+  height: 20px; /* Set the height to the same value as the .mat-progress-bar class */
+}
+
+.mat-progress-bar-buffer::after {
+  background-color: #dee2e6;
+  height: 20px; /* Set the height to the same value as the .mat-progress-bar class */
+}
+.width-a{
+  width: 1200px;
+}

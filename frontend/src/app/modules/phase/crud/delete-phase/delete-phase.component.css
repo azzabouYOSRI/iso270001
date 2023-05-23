@@ -1,0 +1,9 @@
+.align{
+display:flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+}
+.btn-ui{
+  margin-right: 15px;
+}

@@ -1,0 +1,20 @@
+.example-margin {
+  margin: 0 12px;
+}
+table {
+  width: 100%;
+}
+.mat-mdc-radio-button ~ .mat-mdc-radio-button {
+  margin-left: 16px;
+}
+.btn-ui{
+  margin-right: 15px;
+}
+.align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.field-spacer{
+  margin-right: 35px;
+}

@@ -24,14 +24,13 @@ extra["springBootAdminVersion"] = "3.0.0-M4"
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
-    implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("de.codecentric:spring-boot-admin-starter-server")
     implementation("jakarta.servlet:jakarta.servlet-api:5.0.0")
     implementation("org.springframework:spring-web:6.0.3")
     implementation("org.springframework:spring-webmvc:6.0.3")
     implementation("org.joinfaces:tomcat-spring-boot-starter:4.7.8")
+    implementation("org.springframework.boot:spring-boot-tools:2.2.13.RELEASE")
     compileOnly("org.projectlombok:lombok")
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     runtimeOnly("com.mysql:mysql-connector-j")

@@ -1,0 +1,58 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2>new project</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="projectForm" (ngSubmit)="proceedAddProject()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" >
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Budget</mat-label>
+              <input matInput type="text" name="budget" formControlName="budget" (keydown)="this.operations.keyPress($event)">
+                <mat-error *ngIf="this.projectForm.controls.budget">test123</mat-error>
+
+              </mat-form-field>
+
+                <mat-form-field appearance="fill" class="spacer fit-width">
+                  <mat-label>Choose the starting date</mat-label>
+                  <input  [formControl]="stardate2" matInput  [matDatepicker]="picker1">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker1" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="fit-width">
+                  <mat-label>Choose the end date</mat-label>
+                  <input [formControl]="endDate2" matInput  [matDatepicker]="picker2">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker2" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+
+        <mat-form-field class="example-full-width">
+            <mat-label>Client </mat-label>
+              <mat-select (selectionChange)="onOptionSelected($event)" formControlName="client" >
+                <mat-option
+                  *ngFor="let companyName of companyNames" [value]="companyName" > {{companyName}}
+
+                </mat-option>
+
+              </mat-select>
+          </mat-form-field>
+              <div class="align">
+                <button mat-raised-button color="primary">Submit</button></div>
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+
+

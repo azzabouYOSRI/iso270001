@@ -1,0 +1,55 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2> Add new user</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="userForm" (ngSubmit)="proceedSave()">
+            <mat-form-field class="example-full-width">
+              <mat-label>email</mat-label>
+              <input matInput formControlName="email" >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" >
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Lastname</mat-label>
+                <input matInput formControlName="lastname" >
+              </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+                <mat-label>Phone</mat-label>
+  <input matInput type="text" name="phone" formControlName="phone" (keydown)="this.operations.keyPress($event)">
+              </mat-form-field>
+
+
+
+              <mat-form-field class="example-full-width">
+                <mat-label>Company name</mat-label>
+                <input matInput formControlName="companyName" >
+              </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>type of user</mat-label>
+              <mat-select formControlName="typeOfUser">
+                <mat-label>Type of User</mat-label>
+                <mat-option *ngFor="let user of typeOfUser" [value]="user" > {{user}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+              <mat-radio-group class="align" formControlName="gender" aria-label="Select an option">
+                <mat-radio-button value="male">Male</mat-radio-button>
+                <mat-radio-button value="female">Female</mat-radio-button>
+              </mat-radio-group>
+
+              <div class="align btn-ui">
+                <button mat-raised-button color="primary">Submit</button>
+              </div>
+
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+

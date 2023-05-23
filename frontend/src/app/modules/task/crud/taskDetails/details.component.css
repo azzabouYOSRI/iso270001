@@ -1,0 +1,49 @@
+.card {
+  max-width: 500px;
+  margin: 20px auto;
+  width: 500px;
+}
+.back-button {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.align{
+display:flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+}
+
+.back-button button {
+  margin-right: 10px;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 20px;
+}
+
+.project-field-label {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.project-field-label span {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.project-field-value {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.project-field-value span {
+  margin-bottom: 10px;
+}
+
+

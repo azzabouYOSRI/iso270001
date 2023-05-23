@@ -1,0 +1,27 @@
+
+<nav *ngIf="isMenuVisible" class="menu">
+
+  <ol>
+    <li class="menu-item"><a mat-button  routerLink="">Home</a></li>
+        <li class="menu-item"><a mat-button  routerLink="/todo">Todo</a></li>
+    <li *ngIf="isadmin" class="menu-item">
+      <span class="normal"> Users</span>
+      <ol class="sub-menu">
+        <li><a class="menu-item" mat-button routerLink="/users">all users</a></li>
+        <li><a class="menu-item" mat-button routerLink="/register">Add new user</a></li>
+      </ol>
+    </li>
+    <li *ngIf="isadmin" class="menu-item">
+      <span class="normal">Projects</span>
+      <ol class="sub-menu">
+        <li><a class="menu-item" mat-button routerLink="/projects">all projects</a></li>
+        <li><a class="menu-item" mat-button routerLink="/new-project">New project</a></li>
+      </ol>
+    </li>
+      <li *ngIf="!isadmin" class="menu-item"><a mat-button  routerLink="/projects">projects</a></li>
+      <li  class="menu-item"><a mat-button  routerLink="/profile">Profile</a></li>
+  <li class="menu-item"><a mat-button  routerLink="/login">Logout</a></li>
+  </ol>
+
+</nav>
+

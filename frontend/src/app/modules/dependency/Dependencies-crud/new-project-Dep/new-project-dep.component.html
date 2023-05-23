@@ -1,0 +1,40 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2>New project dependency</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="DependencyForm" (ngSubmit)="proceedAdd()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" >
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" >
+              </mat-form-field>
+          <mat-form-field class="example-full-width">
+                <mat-label>url</mat-label>
+                <input matInput formControlName="url" >
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width">
+                <mat-label>cost if applies</mat-label>
+              <input matInput type="text" name="budget" formControlName="cost" (keydown)="this.operations.keyPress($event)">
+<!--                <mat-error *ngIf="this.projectForm.controls.budget">test123</mat-error>-->
+
+              </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <mat-label>Type </mat-label>
+              <mat-select formControlName="type">
+                <mat-option *ngFor="let type of types" [value]="type" > {{type}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+              <div class="align">
+                <button mat-raised-button color="primary">Submit</button></div>
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+

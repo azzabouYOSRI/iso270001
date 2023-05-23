@@ -10,20 +10,29 @@ import {MatDialogModule} from "@angular/material/dialog"
 import {MatSelectModule} from "@angular/material/select"
 import {MatCheckboxModule} from "@angular/material/checkbox"
 import {MatToolbarModule} from "@angular/material/toolbar";
+import {MatNativeDateModule} from "@angular/material/core";
+import {MatIconModule} from "@angular/material/icon";
+
 
 
 @NgModule({
-    exports: [
-        MatInputModule,
-        MatCardModule,
-        MatRadioModule,
-        MatButtonModule,
-        MatTableModule,MatPaginatorModule,
-        MatSortModule,
-        MatDialogModule,
-        MatSelectModule,
-        MatCheckboxModule,
-        MatToolbarModule
+  exports: [
+    MatInputModule,
+    MatCardModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatTableModule, MatPaginatorModule,
+    MatSortModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatCheckboxModule,
+    MatToolbarModule,
+    MatNativeDateModule
+  ],
+  imports: [
+    MatIconModule
+  ],
+  declarations: [
     ]
 })
 export class MaterialModule { }

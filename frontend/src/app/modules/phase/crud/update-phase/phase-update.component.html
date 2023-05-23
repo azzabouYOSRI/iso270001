@@ -1,0 +1,75 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2>{{title}} </h2>
+    </mat-card-header>
+    <mat-card-content class="content">
+        <form class="example-form" [formGroup]="phaseForm" (ngSubmit)="formControl()">
+            <mat-form-field class="example-fit-width field-spacer">
+              <mat-label>Name</mat-label>
+              <input matInput formControlName="name" >
+            </mat-form-field>
+           <mat-form-field class="example-fit-width">
+              <mat-label>order</mat-label>
+              <input matInput formControlName="posistion" >
+            </mat-form-field>
+
+          <mat-form-field class="example-full-width field-spacer">
+                <mat-label>Description</mat-label>
+                <input matInput formControlName="description" >
+              </mat-form-field>
+          <mat-form-field class="example-full-width " >
+                <mat-label>cost</mat-label>
+                <input matInput formControlName="cost" >
+              </mat-form-field>
+
+              <mat-form-field appearance="fill" class="example-fit-width field-spacer">
+                  <mat-label>starting date</mat-label>
+                  <input  [formControl]="stardate2" matInput  [matDatepicker]="picker1">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker1" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker1 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="example-fit-width " >
+                  <mat-label> end date</mat-label>
+                  <input [formControl]="endDate2" matInput  [matDatepicker]="picker2">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker2" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker2 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field appearance="fill" class=" example-fit-width field-spacer" >
+                  <mat-label>real starting date</mat-label>
+                  <input  [formControl]="realStarDate2" matInput  [matDatepicker]="picker3">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker3" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker3 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="example-fit-width" >
+                  <mat-label>real end date</mat-label>
+                  <input [formControl]="realEndDate2" matInput  [matDatepicker]="picker4">
+                  <mat-hint>MM/DD/YYYY</mat-hint>
+                  <mat-datepicker-toggle   matIconSuffix [for]="picker4" ></mat-datepicker-toggle>
+                  <mat-datepicker #picker4 startView="year" [startAt]="startDateui"></mat-datepicker>
+                </mat-form-field>
+
+              <div>
+            <mat-checkbox formControlName="isSubPhase" (change)="this.isSubPhaseHandler($event)" > this a subphase</mat-checkbox>
+              </div>
+          <ng-container *ngIf="phaseForm.controls.isSubPhase.value" >
+             <mat-form-field class="example-full-width">
+            <mat-label>Parent </mat-label>
+              <mat-select formControlName="parent" >
+                <mat-option
+                  *ngFor="let phase of phasesNames" [value]="phase" > {{phase}}
+
+                </mat-option>
+
+              </mat-select>
+          </mat-form-field>
+            </ng-container>
+
+                <button mat-raised-button color="primary">Submit</button>
+          </form>
+    </mat-card-content>
+  </mat-card>

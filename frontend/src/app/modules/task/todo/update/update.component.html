@@ -1,0 +1,17 @@
+<mat-card class="content">
+    <mat-card-header>
+        <h2>SubTask validation </h2>
+    </mat-card-header>
+    <mat-card-content class="content">
+        <form class="example-form" [formGroup]="Form" (ngSubmit)="formControl()">
+           <mat-form-field class="example-full-width">
+              <mat-label>url</mat-label>
+              <input matInput formControlName="posistion" >
+            </mat-form-field>
+              <div class="align">
+            <mat-checkbox formControlName="done" class="example-margin">done</mat-checkbox>
+          </div>
+                <button mat-raised-button color="primary">Submit</button>
+          </form>
+    </mat-card-content>
+  </mat-card>

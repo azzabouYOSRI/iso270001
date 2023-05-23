@@ -1,0 +1,61 @@
+
+
+<div class="mat-elevation-z8">
+
+  <table mat-table matSort [dataSource]="dataSource">
+    <caption>Your Todo-List</caption>
+    <!-- id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"   > {{element.id}}  </td>
+
+    </ng-container>
+
+    <!-- Name Column -->v315
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+
+     <!-- cost Column -->v315
+    <ng-container matColumnDef="order">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> order </th>
+      <td mat-cell *matCellDef="let element"> {{element.posistion}} </td>
+    </ng-container>
+
+          <ng-container class="mat-expansion" matColumnDef="details">
+      <<th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="openDialogCaller(element,taskdetail)" mat-button class="mat-button-black">details</button>
+                </td>
+    </ng-container>
+
+        <!-- update Column -->v315
+   <ng-container matColumnDef="open">
+                <th mat-header-cell  *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="this.openDialog2(600,1000,element.id,TodoListing2Component)" mat-raised-button color="accent">SubTasks</button>
+                </td>
+   </ng-container>
+
+     <ng-container matColumnDef="mark done">
+                <th mat-header-cell  *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="marktaskDone(element.id)" mat-raised-button color="primary">mark done</button>
+                </td>
+   </ng-container>
+
+
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+
+

@@ -1,0 +1,55 @@
+
+
+<div class="mat-elevation-z8">
+
+  <table mat-table matSort [dataSource]="dataSource">
+    <caption>subtasks list</caption>
+
+    <!-- Name Column -->v315
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+
+     <!-- cost Column -->v315
+    <ng-container matColumnDef="order">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> order </th>
+      <td mat-cell *matCellDef="let element"> {{element.posistion}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="description">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> description </th>
+      <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+    </ng-container>
+
+ <ng-container matColumnDef="done">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> done </th>
+      <td mat-cell *matCellDef="let element"> {{element.done}} </td>
+    </ng-container>
+
+     <ng-container matColumnDef="update">
+                <th mat-header-cell  *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="openDialogCaller(element.id,UpdateComponent)" mat-raised-button color="accent">Update</button>
+                </td>
+   </ng-container>
+     <ng-container matColumnDef="mark done">
+                <th mat-header-cell  *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="markSubtaskDone(element)" mat-raised-button color="primary">mark done</button>
+                </td>
+   </ng-container>
+
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+
+

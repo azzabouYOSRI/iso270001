@@ -1,0 +1,46 @@
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>
+        <h3>Personal Information</h3>
+        </mat-card-title>
+      </mat-card-header>
+  <mat-card-content>
+    <div class="info">
+      <div class="project-field-label">
+        <span>Name:</span>
+        <span>Last Name:</span>
+        <span>Email:</span>
+        <span>Phone:</span>
+        <span>Company Name:</span>
+        <span>gender:</span>
+      </div>
+      <div class="project-field-value">
+        <span>{{Data.name}}</span>
+        <span>{{Data.lastname}}</span>
+        <span>{{Data.email}}</span>
+        <span>{{Data.phone}}</span>
+        <span>{{Data.companyName}}</span>
+        <span>{{Data.gender}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+<mat-card class="card">
+    <mat-card-header>
+        <mat-card-title>
+        <h3>Account settings</h3>
+        </mat-card-title>
+      </mat-card-header>
+  <mat-card-content>
+      <div class="align">
+  <button mat-button color="accent" (click)="changePassword()" aria-label=" ">Update password</button>
+
+  <button mat-button color="accent"  (click)="updatInfo()"  aria-label="">Update profile info</button>
+
+</div>
+
+  </mat-card-content>
+</mat-card>
+
+
+

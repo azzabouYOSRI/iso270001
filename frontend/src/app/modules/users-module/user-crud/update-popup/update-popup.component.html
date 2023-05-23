@@ -1,0 +1,67 @@
+<!--<div class="align">-->
+<mat-card>
+    <mat-card-header >
+                <div class="align">
+        <h2>{{title}}</h2>
+                </div>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="userForm" (ngSubmit)="proceedSave()">
+
+          <div class="align">
+            <mat-form-field  class="field-spacer example-fit-width">
+                <mat-label>Name</mat-label>
+                <input matInput formControlName="name" >
+              </mat-form-field>
+
+              <mat-form-field class="example-fit-width">
+                <mat-label>Lastname</mat-label>
+                <input matInput formControlName="lastname" >
+              </mat-form-field>
+          </div>
+          <div class="align">
+
+           <mat-form-field  class="field-spacer example-fit-width">
+              <mat-label>email</mat-label>
+              <input matInput formControlName="email" >
+            </mat-form-field>
+
+          <mat-form-field class="example-fit-width">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone" >
+              </mat-form-field>
+          </div>
+                    <div class="align">
+
+              <mat-form-field class="example-fit-width field-spacer">
+                <mat-label>Company name</mat-label>
+                <input matInput formControlName="companyName" >
+              </mat-form-field>
+          <mat-form-field  >
+                <mat-label>type of user</mat-label>
+              <mat-select formControlName="typeOfUser">
+                <mat-label >Type of User</mat-label>
+                <mat-option *ngFor="let user of typeOfUser" [value]="user" > {{user}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+                    </div>
+                    <div class="align">
+
+          <br>
+              <mat-radio-group class="align" formControlName="gender" aria-label="Select an option">
+                <mat-radio-button  name="gender" value="male">Male</mat-radio-button>
+                <mat-radio-button  name="gender" value="female">Female</mat-radio-button>
+              </mat-radio-group>
+                    </div>
+          <div class="align">
+            <mat-checkbox  *ngIf="admin" formControlName="activeAccount" class="example-margin">Active Account</mat-checkbox>
+          </div>
+              <div class="align">
+                <button mat-raised-button class="btn-ui" color="primary">Submit</button>
+                <button mat-dialog-close="" mat-raised-button color="warn" >Cancel</button>
+              </div>
+
+          </form>
+    </mat-card-content>
+  </mat-card>
+<!--</div>-->

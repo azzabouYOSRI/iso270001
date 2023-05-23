@@ -1,0 +1,67 @@
+
+
+.example-full-width {
+  width: 100%;
+}
+.example-fit-width{
+  width: 48.5% ;
+}
+
+:host {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+   .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    width: 100%;
+     max-width: 800px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+   .field-spacer{
+     margin-right: 11px;
+   }
+
+   .align{
+display:flex;
+justify-content: center;
+align-items: center;
+height: 100%;
+}
+.btn-ui{
+  margin-right: 15px;
+}
+.horizontal-align {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-gap: 20px;
+  }
+
+  .grid-item {
+    display: flex;
+    justify-content: center;
+  }
+
+  .left {
+    grid-row: 1 / span 1;
+    grid-column: 1 / span 1;
+  }
+
+  .right {
+    grid-row: 1 / span 1;
+    grid-column: 2 / span 1;
+  }
+

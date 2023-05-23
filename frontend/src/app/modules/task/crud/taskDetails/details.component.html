@@ -1,0 +1,35 @@
+<mat-card class="card">
+  <div class="back-button">
+    <button mat-icon-button mat-dialog-close="">
+      <mat-icon>x</mat-icon>
+    </button>
+    <span>Close</span>
+  </div>
+  <mat-card-content>
+    <div class="info">
+      <div class="project-field-label">
+        <span>Name:</span>
+        <span>Description:</span>
+        <span>Order:</span>
+        <span>Start Date:</span>
+        <span>End Date:</span>
+        <span>progress:</span>
+        <span>Real start date:</span>
+        <span>Real end date :</span>
+      </div>
+      <div class="project-field-value">
+        <span>{{Data.id.name}}</span>
+        <span>{{Data.id.description}}</span>
+         <span>{{Data.id.posistion}}</span>
+        <span>{{Data.id.startDate}}</span>
+        <span>{{Data.id.endDate}}</span>
+        <span>{{Data.id.progress}}</span>
+       <span>{{Data.id.realStartDate}}</span>
+       <span>{{Data.id.realEndDate}}</span>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+
+

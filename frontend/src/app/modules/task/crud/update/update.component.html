@@ -1,0 +1,151 @@
+<div class="align">
+<button (click)="this.operations.goTo('tasks')" aria-label=" " color="accent" mat-button>Back to list tasks</button>
+</div>
+<div class="grid-container">
+  <div class="grid-item left">
+<mat-card class="content">
+
+  <mat-card-header>
+    <h2>Update Task </h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="taskformControl()" [formGroup]="TaskForm" class="example-form">
+      <mat-form-field class="example-fit-width field-spacer">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput>
+      </mat-form-field>
+      <mat-form-field class="example-fit-width">
+        <mat-label>order</mat-label>
+        <input formControlName="posistion" matInput>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <mat-label>Description</mat-label>
+        <input formControlName="description" matInput>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-fit-width field-spacer">
+        <mat-label>Choose the starting date</mat-label>
+        <input [formControl]="stardate2" [matDatepicker]="picker1" matInput>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="picker1" matIconSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker1 [startAt]="startDateui" startView="year"></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="example-fit-width">
+        <mat-label>Choose the end date</mat-label>
+        <input [formControl]="endDate2" [matDatepicker]="picker2" matInput>
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="picker2" matIconSuffix></mat-datepicker-toggle>
+        <mat-datepicker #picker2 [startAt]="startDateui" startView="year"></mat-datepicker>
+      </mat-form-field>
+      <div class="align">
+        <button class="btn-ui" color="primary" mat-raised-button>Submit</button>
+        <a (click)="taskWithoutSubTaskSubmit()" *ngIf="noSubtask" color="accent" mat-raised-button>No subTasks</a>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>
+</div>
+
+  <div class="grid-item right ">
+
+    <div class="horizontal-align">
+      <mat-card class="content">
+        <mat-card-header>
+          <h2>SubTask </h2>
+        </mat-card-header>
+        <mat-card-content>
+          <form (ngSubmit)="subTaskJunctionSumbit()" [formGroup]="subTaskForm" class="example-form">
+            <mat-form-field class="example-fit-width field-spacer">
+              <mat-label>Name</mat-label>
+              <input formControlName="name" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-fit-width">
+              <mat-label>order</mat-label>
+              <input formControlName="posistion" matInput>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+              <mat-label>Description</mat-label>
+              <input formControlName="description" matInput>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <mat-label>url</mat-label>
+              <input formControlName="url" matInput>
+            </mat-form-field>
+            <div class="align">
+              <button class=" btn-ui" color="primary" mat-raised-button>{{dynamicButtonName}}</button>
+<!--              <a  (click)="updateToAdd()" *ngIf="cancel" color="warn" mat-raised-button>cancel</a>-->
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+    <div class="mat-elevation-z8">
+
+      <table [dataSource]="dataSource" mat-table>
+        <caption>Sub tasks</caption>
+        <!-- id Column -->
+        <ng-container matColumnDef="id">
+          <th *matHeaderCellDef mat-header-cell> id</th>
+          <td *matCellDef="let element" mat-cell> {{element.id}}  </td>
+
+        </ng-container>
+
+        <!-- Name Column -->v315
+        <ng-container matColumnDef="name">
+          <th *matHeaderCellDef mat-header-cell> Name</th>
+          <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+        </ng-container>
+
+
+        <!-- cost Column -->v315
+        <ng-container matColumnDef="order">
+          <th *matHeaderCellDef mat-header-cell> order</th>
+          <td *matCellDef="let element" mat-cell> {{element.posistion}} </td>
+        </ng-container>
+        <ng-container matColumnDef="done">
+          <th *matHeaderCellDef mat-header-cell> done</th>
+          <td *matCellDef="let element" mat-cell> {{element.done}} </td>
+        </ng-container>
+
+        <ng-container class="mat-expansion" matColumnDef="details">
+          <
+          <th *matHeaderCellDef mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="openDialogCaller(element,subTaskDetail)" class="mat-button-black" mat-button>details</button>
+          </td>
+        </ng-container>
+
+        <!-- update Column -->v315
+        <ng-container matColumnDef="update">
+          <th *matHeaderCellDef mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="updatePatch(element.id)" color="primary" mat-raised-button>Update</button>
+          </td>
+        </ng-container>
+
+
+        <!-- delete Column -->v315
+        <ng-container matColumnDef="delete">
+          <th *matHeaderCellDef mat-header-cell></th>
+          <td *matCellDef="let element" mat-cell>
+            <button (click)="delete(element.id)" color="warn" mat-raised-button>Delete</button>
+          </td>
+        </ng-container>
+
+
+        <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+      </table>
+      <div class="align">
+        <h3>
+          <button (click)="subTaskSubmit()" aria-label=" " class="align" color="accent" mat-button>Save subTasks
+          </button>
+        </h3>
+      </div>
+    </div>

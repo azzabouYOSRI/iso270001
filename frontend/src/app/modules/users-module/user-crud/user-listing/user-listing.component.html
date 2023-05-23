@@ -1,0 +1,117 @@
+<mat-card>
+  <mat-card-header class="center">
+    <h1>List of All users</h1>
+  </mat-card-header>
+  <div class="center">
+    <h2 class="title-spacer">filter results</h2>
+        <form class="example-form" [formGroup]="filterForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field class="example-full-width">
+                <mat-label>keyword</mat-label>
+                <input class="small-input" matInput formControlName="keyword" >
+              </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>filter by</mat-label>
+              <mat-select formControlName="field">
+                <mat-label>filter by</mat-label>
+                <mat-option *ngFor="let field of fields" [value]="field" > {{field}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+
+                <button mat-raised-button class="primary btn-size " >Filter</button>
+          </form>
+</div>
+
+<div class="mat-elevation-z8">
+  <table mat-table matSort [dataSource]="dataSource">
+    <caption><h3>Users</h3></caption>
+    <!-- id Column -->
+    <ng-container matColumnDef="idu">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> id </th>
+      <td mat-cell *matCellDef="let element"   > {{element.idu}}  </td>
+
+    </ng-container>
+
+    <!-- Name Column -->v315
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+     <!-- Lastname Column -->v315
+    <ng-container matColumnDef="lastname">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Lastname </th>
+      <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+    </ng-container>
+
+
+
+        <!-- Email Column -->v315
+    <ng-container matColumnDef="email">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Email </th>
+      <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
+        <!-- typeOfUser Column -->v315
+    <ng-container matColumnDef="typeOfUser">
+      <th mat-header-cell mat-sort-header  *matHeaderCellDef> Type </th>
+      <td mat-cell *matCellDef="let element"> {{element.typeOfUser}} </td>
+    </ng-container>
+
+        <!-- Phone Column -->v315
+    <ng-container matColumnDef="phone">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Phone </th>
+      <td mat-cell *matCellDef="let element"> {{element.phone}} </td>
+    </ng-container>
+
+        <!-- gender Column -->v315
+    <ng-container matColumnDef="gender">
+      <th mat-header-cell mat-sort-header  *matHeaderCellDef> Gender </th>
+      <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+
+       <!-- Phone address -->v315
+    <ng-container matColumnDef="companyname">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> Company Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+    </ng-container>
+
+        <!-- Active account Column -->v315
+    <ng-container matColumnDef="activeAccount">
+      <th mat-header-cell mat-sort-header  *matHeaderCellDef> Active account </th>
+      <td mat-cell *matCellDef="let element"> {{element.activeAccount}} </td>
+    </ng-container>
+
+
+   <ng-container matColumnDef="update">
+                <th mat-header-cell  *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button  (click)="update(element.idu)" mat-raised-button color="primary">Update</button>
+                </td>
+   </ng-container>
+    <ng-container matColumnDef="delete">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="delete(element.idu)" mat-raised-button color="warn">Delete</button>
+<!--                    *ngIf="element.role !=='admin'" -->
+                </td>
+              </ng-container>
+    <ng-container matColumnDef="resetPassword">
+                <th mat-header-cell *matHeaderCellDef>  </th>
+                <td mat-cell *matCellDef="let element">
+                    <button (click)="resetPassword(element.idu)" mat-raised-button class="warn">Reset Password</button>
+                </td>
+              </ng-container>
+
+     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+</mat-card>
+

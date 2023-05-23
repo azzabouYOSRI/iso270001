@@ -1,0 +1,23 @@
+<mat-toolbar> ISMS implementation tracker</mat-toolbar>
+<mat-card>
+    <mat-card-header>
+      <div class="align">
+        <h2>Login</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="loginform" (ngSubmit)="proceedLogin()">
+            <mat-form-field class="example-full-width">
+              <mat-label>Username</mat-label>
+              <input matInput formControlName="email" >
+            </mat-form-field>
+              <mat-form-field class="example-full-width">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" formControlName="password" >
+              </mat-form-field>
+
+              <div class="align">
+                <button mat-raised-button class="primary">Login</button></div>
+          </form>
+    </mat-card-content>
+  </mat-card>

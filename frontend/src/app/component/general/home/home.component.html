@@ -1,0 +1,88 @@
+<div class="align">
+  <button *ngIf="admin" mat-button color="accent"  (click)="newDefaultPhase()" > Add default phase</button>
+    <button *ngIf="admin" mat-button color="accent"  (click)="listDefaultPhases()" > List default phases</button>
+</div>
+<mat-card class="content">
+    <mat-card-header>
+        <h2>Choose a project</h2>
+    </mat-card-header>
+    <mat-card-content>
+        <form class="example-form" [formGroup]="form">
+
+          <mat-form-field class="example-full-width">
+            <mat-label>project </mat-label>
+              <mat-select (selectionChange)="onOptionSelected($event)" formControlName="project">
+                <mat-option *ngFor="let name of projectsNames" [value]="name" > {{name}}</mat-option>
+              </mat-select>
+          </mat-form-field>
+          </form>
+    </mat-card-content>
+  </mat-card>
+
+
+
+
+<div class="align">
+<mat-card class="content ">
+    <mat-card-header>
+      <div class="width-a">
+                <h2>{{projectName}}</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+       <div class="align">
+                <h3 >{{projectProgress}}   |  {{projectStart}}  |  {{projectEnd}}      |     {{projectStatus}}  {{projectRealStartDate}}  {{projectRealEndDate}} </h3>
+      </div>
+<mat-progress-bar class=" mat-progress-bar-buffer" mode="determinate" value="{{projectProgressbar}}" appearance="fill"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+<div class="align">
+
+<mat-card class="content">
+    <mat-card-header>
+      <div class="width-a">
+                <h2>{{phaseName}}</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+       <div>
+                <h3>{{phaseProgress}} |  {{phaseStart}}  |  {{phaseEnd}}      |     {{phaseStatus}}  {{phaseRealStartDate}}  {{phaseRealEndDate}}</h3>
+      </div>
+<mat-progress-bar  mode="determinate" value="{{phaseProgressbar}}" appearance="fill"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="align">
+
+<mat-card class="content">
+    <mat-card-header>
+      <div  class="width-a">
+                <h2>{{ activtiyName}}</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+       <div  class="width-a">
+                <h3>{{ activtiyProgress}} |  {{ activtiyStart}}  |  {{activtiyEnd}}      |     {{activtiyStatus}}  {{activtiyRealStartDate}}  {{activtiyRealEndDate}}</h3>
+      </div>
+<mat-progress-bar  mode="determinate" value="{{activtiyProgressbar}}" appearance="fill"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+</div>
+<div class="align">
+
+<mat-card class="content">
+    <mat-card-header>
+      <div  class="width-a">
+                <h2>Cost budget ratio</h2>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+       <div  class="width-a">
+                <h3>{{progress}} |  {{ cost}}  |  {{budget}} </h3>
+      </div>
+<mat-progress-bar  mode="determinate" value="{{activtiyProgressbar}}" appearance="fill"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+</div>

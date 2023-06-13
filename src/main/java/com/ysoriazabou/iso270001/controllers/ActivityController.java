@@ -81,6 +81,9 @@ public class ActivityController {
           if (activity.getChildDones() != null){
             exist.setChildDones(activity.getChildDones());
         }
+            if (activity.getUrl() != null){
+            exist.setUrl(activity.getUrl());
+        }
 
 activityService.save(exist);
         return ResponseEntity.ok().body(exist);

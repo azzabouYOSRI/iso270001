@@ -4,7 +4,7 @@
 </div>
 <mat-card class="content">
     <mat-card-header>
-        <h2>Choose a project</h2>
+        <h1>Choose a project</h1>
     </mat-card-header>
     <mat-card-content>
         <form class="example-form" [formGroup]="form">
@@ -26,12 +26,12 @@
 <mat-card class="content ">
     <mat-card-header>
       <div class="width-a">
-                <h2>{{projectName}}</h2>
+                <h1>{{projectName}}</h1>
       </div>
     </mat-card-header>
     <mat-card-content>
        <div class="align">
-                <h3 >{{projectProgress}}   |  {{projectStart}}  |  {{projectEnd}}      |     {{projectStatus}}  {{projectRealStartDate}}  {{projectRealEndDate}} </h3>
+                <h2 > {{projectProgress}}   |  {{projectStart}}  |  {{projectEnd}}      |     {{projectStatus}}  {{projectRealStartDate}}  {{projectRealEndDate}} </h2>
       </div>
 <mat-progress-bar class=" mat-progress-bar-buffer" mode="determinate" value="{{projectProgressbar}}" appearance="fill"></mat-progress-bar>
     </mat-card-content>
@@ -43,12 +43,12 @@
 <mat-card class="content">
     <mat-card-header>
       <div class="width-a">
-                <h2>{{phaseName}}</h2>
+                <h1>{{phaseName}}</h1>
       </div>
     </mat-card-header>
     <mat-card-content>
-       <div>
-                <h3>{{phaseProgress}} |  {{phaseStart}}  |  {{phaseEnd}}      |     {{phaseStatus}}  {{phaseRealStartDate}}  {{phaseRealEndDate}}</h3>
+       <div class="align">
+                <h2>{{phaseProgress}} |  {{phaseStart}}  |  {{phaseEnd}}      |     {{phaseStatus}}  {{phaseRealStartDate}}  {{phaseRealEndDate}}</h2>
       </div>
 <mat-progress-bar  mode="determinate" value="{{phaseProgressbar}}" appearance="fill"></mat-progress-bar>
     </mat-card-content>
@@ -59,12 +59,12 @@
 <mat-card class="content">
     <mat-card-header>
       <div  class="width-a">
-                <h2>{{ activtiyName}}</h2>
+                <h1>{{ activtiyName}}</h1>
       </div>
     </mat-card-header>
     <mat-card-content>
-       <div  class="width-a">
-                <h3>{{ activtiyProgress}} |  {{ activtiyStart}}  |  {{activtiyEnd}}      |     {{activtiyStatus}}  {{activtiyRealStartDate}}  {{activtiyRealEndDate}}</h3>
+       <div  class="width-a align">
+                <h2>{{ activtiyProgress}} |  {{ activtiyStart}}  |  {{activtiyEnd}}      |     {{activtiyStatus}}  {{activtiyRealStartDate}}  {{activtiyRealEndDate}}</h2>
       </div>
 <mat-progress-bar  mode="determinate" value="{{activtiyProgressbar}}" appearance="fill"></mat-progress-bar>
     </mat-card-content>
@@ -74,15 +74,15 @@
 
 <mat-card class="content">
     <mat-card-header>
-      <div  class="width-a">
-                <h2>Cost budget ratio</h2>
+      <div  class="width-a align">
+                <h1>Cost budget ratio</h1>
       </div>
     </mat-card-header>
     <mat-card-content>
        <div  class="width-a">
-                <h3>{{progress}} |  {{ cost}}  |  {{budget}} </h3>
+                <h2>{{progress}} |  {{ cost}}  |  {{budget}} </h2>
       </div>
-<mat-progress-bar  mode="determinate" value="{{activtiyProgressbar}}" appearance="fill"></mat-progress-bar>
+<mat-progress-bar  mode="determinate" value="{{progressbar}}" appearance="fill"></mat-progress-bar>
     </mat-card-content>
   </mat-card>
 </div>

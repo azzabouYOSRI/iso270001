@@ -15,7 +15,8 @@ import {PreparationsService} from "../../../../utilities/service/preparations/pr
 })
 export class NewComponent implements OnInit {
   user: any;
-  stardate2 = new FormControl('', Validators.required);
+  date:any =new Date();
+  stardate2 = new FormControl(this.date, Validators.required);
   endDate2 = new FormControl('');
   realEndDate2 = new FormControl('');
   realStarDate2 = new FormControl('');
@@ -25,14 +26,15 @@ export class NewComponent implements OnInit {
   Form = this.builder.group({
     name: this.builder.control('', Validators.required),
     description: this.builder.control('', Validators.required),
-    posistion: this.builder.control(''),
+    posistion: this.builder.control(0),
     startDate: this.stardate2,
     endDate: this.endDate2,
+    url: this.builder.control(''),
     realStartDate:this.realStarDate2,
     realEndDate: this.realEndDate2,
     phase: this.builder.control(''),
     subPhase: this.builder.control(''),
-    cost: this.builder.control('')
+    cost: this.builder.control(0)
   });
   phasesNames: any;
   subPhaseGate: boolean = false;
@@ -122,7 +124,12 @@ export class NewComponent implements OnInit {
 
 
   submit() {
+    if(this.formValue.cost==null||this.formValue.cost=="")
+    {
+      this.formValue.cost=0;
+    }
     this.formValue.progress = 0;
+    this.formValue.childDones = 0;
     delete this.formValue.subPhase;
     console.log(this.formValue);
     this.service.add(this.formValue, "activity").subscribe(() => {

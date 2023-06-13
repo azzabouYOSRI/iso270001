@@ -20,5 +20,6 @@ public interface ProjectDependencyInterface
     List<ProjectDependency> findAll();
 
 
-
+    @Transactional
+    List<ProjectDependency> findAllByProjectId(long idp);
 }

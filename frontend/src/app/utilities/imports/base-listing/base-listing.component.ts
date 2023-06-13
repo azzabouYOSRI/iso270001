@@ -26,16 +26,21 @@ export class BaseListingComponent implements OnInit{
     protected operations: OperationsService,
     protected toastr: ToastrService,
     protected preparation: PreparationsService) {
+    this.roundedNumber = Math.round(this.number * 10) / 10;
   }
 
   ngOnInit(): void {
           this.fixAllowAddPM();
           this.isPM = this.operations.isPmHandler();
-
+          if(sessionStorage.getItem('homeDefaultPm')=='true' && sessionStorage.getItem('type')=='admin'){
+            this.isPM=true;
+          }
     }
- titleHandler(){}
+    roundedNumber: number=0;
+    number: number = 0;
+  titleHandler(){}
 
- allowAddPm: boolean = false;
+  allowAddPm: boolean = false;
 
 
    filterForm = this.builder.group({
@@ -54,16 +59,16 @@ export class BaseListingComponent implements OnInit{
       }
     this.service.getAll(endpoint).subscribe(data => {
       list = data;
-      list = this.operations.replaceNullsWithDash(list);
-      if (sessionStorage.getItem('isDefault') == 'true') {}
-      else {      list = this.filter(list)}
-      list= this.operations.replaceNullsWithDash(list)
+            list= this.operations.replaceNullsWithDash(list);
+            this.dataTable = list;
+      list = this.filter(list)
       this.dataSource = new MatTableDataSource (list);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;
     })
   }
 
+  dataTable: any[] = [];
   endpoint : string = "";
 
    update(id: any,component:any) {
@@ -99,7 +104,7 @@ export class BaseListingComponent implements OnInit{
     });
   }
 
-  filter(list:any) : string[] {
+  filter(list:any) : any[] {
      return list;
 }
   delete(id: any,component:any) {

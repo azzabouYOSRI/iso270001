@@ -35,7 +35,7 @@ public class ProjectDependency {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idproject", referencedColumnName = "idp")
+    @JoinColumn(name = "idproject", referencedColumnName = "idp", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private ProjectEntity project;

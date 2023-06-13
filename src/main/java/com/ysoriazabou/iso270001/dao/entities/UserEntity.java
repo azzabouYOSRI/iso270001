@@ -56,5 +56,10 @@ public class UserEntity {
     @ToString.Exclude
     private List<Member> membersList;
 
+   @JsonIgnore
+    @OneToMany (mappedBy="user", fetch=FetchType.LAZY )
+    @ToString.Exclude
+    private List<Notification> notificationsList;
+
 
 }

@@ -21,7 +21,7 @@ export class PreparationsService {
     this.service.getidbyidu(idu,'member').subscribe(data => {
     result = data;
     for(const element of result){
-      if(element.user.idu==idu && element.project.activeProject=="true"){
+      if(element.user.idu==idu && element.project.activeProject=="true" ){
         let idp:string =element.project.idp.toString()
         projects.push(idp)
         projectsRoles.push(element.isPm)
@@ -31,6 +31,25 @@ export class PreparationsService {
               sessionStorage.setItem('projectsRoles', JSON.stringify(projectsRoles));
     })
   }
+
+  // checkMembershipForAdmin() {
+  //   let idu:any;
+  //   idu=sessionStorage.getItem('idu');
+  //   let projects:string[]=[];
+  //   let result:any;
+  //   this.service.getidbyidu(idu,'member').subscribe(data => {
+  //   result = data;
+  //   for(const element of result){
+  //     if(){
+  //       let idp:string =element.project.idp.toString()
+  //       projects.push(idp)
+  //     }
+  //   }
+  //             sessionStorage.setItem('projectsAdmin', JSON.stringify(projects));
+  //   })
+  // }
+
+
   checkPmExistence() {
     let idps: any[] = [0,0];
     idps = this.operations.getArray('idps');
@@ -42,7 +61,7 @@ export class PreparationsService {
       pmExistenceInProjects= this.operations.getArray('pmExistenceInProjects');
     }
        setTimeout(() => {
-          this.service.getbyidp(idps[i], 'member').subscribe((members: any) => {
+          this.service.getbyidp(Number(idps[i]), 'member').subscribe((members: any) => {
         while (z<members.length) {
           if (members[z].isPm=="true"){
             pmExistenceInProjects[i] = "true";
@@ -65,7 +84,7 @@ export class PreparationsService {
     idp=sessionStorage.getItem('selectedProject');
     let membersNames: any[] = [];
     let membersIds: any[] = [];
-    this.service.getbyidp(idp,'member').subscribe((data: any) => {
+    this.service.getbyidp(Number(idp),'member').subscribe((data: any) => {
       for (const element of data) {
               membersNames.push(element.user.name + ' ' + element.user.lastname);
               membersIds.push(element.id.toString());
@@ -122,7 +141,7 @@ export class PreparationsService {
     let subPhasesParent: string[] = [];
 
     idp = sessionStorage.getItem('selectedProject');
-    this.service.getbyidp(idp, 'phase').subscribe(res => {
+    this.service.getbyidp(Number(idp), 'phase').subscribe(res => {
       for (const phase of res) {
         if(phase.project.alternateId !=="default"){
         if(phase.isSubPhase=="false"){
@@ -157,7 +176,7 @@ export class PreparationsService {
     let subPhasesParent: string[] = [];
 
     idp = sessionStorage.getItem('selectedProject');
-    this.service.getbyidp(idp, 'phase').subscribe(res => {
+    this.service.getbyidp(Number(idp), 'phase').subscribe(res => {
       for (const phase of res) {
         if(phase.project.alternateId =="default"){
         if(phase.isSubPhase=="false"){
@@ -173,13 +192,13 @@ export class PreparationsService {
         }
       }
       }
-      sessionStorage.setItem('phasesNames', JSON.stringify(phasesNames));
-      sessionStorage.setItem('phasesIds', JSON.stringify(phasesIds));
-      sessionStorage.setItem('phasesPositions', JSON.stringify(phasesPositions));
-      sessionStorage.setItem('subPhasesNames', JSON.stringify(subPhasesNames));
-      sessionStorage.setItem('subPhasesIds', JSON.stringify(subPhasesIds));
-      sessionStorage.setItem('subPhasesPositions', JSON.stringify(subPhasesPositions));
-      sessionStorage.setItem('subPhasesParent', JSON.stringify(subPhasesParent));
+      sessionStorage.setItem('phasesNamesDefault', JSON.stringify(phasesNames));
+      sessionStorage.setItem('phasesIdsDefault', JSON.stringify(phasesIds));
+      sessionStorage.setItem('phasesPositionsDefault', JSON.stringify(phasesPositions));
+      sessionStorage.setItem('subPhasesNamesDefault', JSON.stringify(subPhasesNames));
+      sessionStorage.setItem('subPhasesIdsDefault', JSON.stringify(subPhasesIds));
+      sessionStorage.setItem('subPhasesPositionsDefault', JSON.stringify(subPhasesPositions));
+      sessionStorage.setItem('subPhasesParentDefault', JSON.stringify(subPhasesParent));
     });
   }
 

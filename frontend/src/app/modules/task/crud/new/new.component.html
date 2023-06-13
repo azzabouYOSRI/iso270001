@@ -16,15 +16,23 @@
       </mat-form-field>
       <mat-form-field class="example-fit-width">
         <mat-label>order</mat-label>
-        <input formControlName="posistion" matInput>
-      </mat-form-field>
+        <input formControlName="posistion" matInput (keydown)="this.operations.keyPressNumbers($event)">
 
-      <mat-form-field class="example-fit-width field-spacer">
+         </mat-form-field>
+         <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
         <input formControlName="description" matInput>
       </mat-form-field>
+        <mat-form-field class="example-fit-width field-spacer">
+        <mat-label>cost</mat-label>
+        <input formControlName="cost" matInput (keydown)="this.operations.keyPress($event)">
+      </mat-form-field>
+        <mat-form-field class="example-fit-width ">
+        <mat-label>url</mat-label>
+        <input formControlName="url" matInput>
+      </mat-form-field>
 
-        <mat-form-field class="example-fit-width">
+        <mat-form-field class="example-full-width  ">
             <mat-label>member </mat-label>
               <mat-select (selectionChange)="onOptionSelected($event)" formControlName="member">
                 <mat-option *ngFor="let name of membersName" [value]="name" > {{name}}</mat-option>
@@ -48,7 +56,7 @@
       </mat-form-field>
       <div class="align">
         <button class="btn-ui" color="primary" mat-raised-button>Submit</button>
-        <a (click)="taskWithoutSubTaskSubmit()" *ngIf="noSubtask" color="accent" mat-raised-button>Default subtask</a>
+        <button   (click)="taskWithoutSubTaskSubmit()" *ngIf="noSubtask" color="accent" mat-raised-button>Default subtask</button>
       </div>
     </form>
   </mat-card-content>
@@ -70,19 +78,15 @@
             </mat-form-field>
             <mat-form-field class="example-fit-width">
               <mat-label>order</mat-label>
-              <input formControlName="posistion" matInput>
+              <input formControlName="posistion" matInput (keydown)="this.operations.keyPressNumbers($event)">
             </mat-form-field>
 
             <mat-form-field class="example-full-width">
               <mat-label>Description</mat-label>
               <input formControlName="description" matInput>
             </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <mat-label>url</mat-label>
-              <input formControlName="url" matInput>
-            </mat-form-field>
             <div class="align">
-              <button class=" btn-ui" color="primary" mat-raised-button>{{dynamicButtonName}}</button>
+              <button  *ngIf="allowAddNewSubatsks"  class=" btn-ui" color="primary" mat-raised-button>{{dynamicButtonName}}</button>
 <!--              <a  (click)="updateToAdd()" *ngIf="cancel" color="warn" mat-raised-button>cancel</a>-->
             </div>
           </form>
@@ -132,7 +136,7 @@
         <ng-container matColumnDef="update">
           <th *matHeaderCellDef mat-header-cell></th>
           <td *matCellDef="let element" mat-cell>
-            <button (click)="updatePatch(element.id)" color="primary" mat-raised-button>Update</button>
+            <button *ngIf="allowAddNewSubatsks" (click)="updatePatch(element.id)" color="primary" mat-raised-button>Update</button>
           </td>
         </ng-container>
 
@@ -141,7 +145,7 @@
         <ng-container matColumnDef="delete">
           <th *matHeaderCellDef mat-header-cell></th>
           <td *matCellDef="let element" mat-cell>
-            <button (click)="delete(element.id)" color="warn" mat-raised-button>Delete</button>
+            <button *ngIf="allowAddNewSubatsks" (click)="delete(element.id)" color="warn" mat-raised-button>Delete</button>
           </td>
         </ng-container>
 
@@ -151,7 +155,7 @@
       </table>
       <div class="align">
         <h3>
-          <button (click)="subTaskSubmit()" aria-label=" " class="align" color="accent" mat-button>Save subTasks
+          <button *ngIf="allowAddNewSubatsks" (click)="subTaskSubmit()" aria-label=" " class="align" color="accent" mat-button>Save subTasks
           </button>
         </h3>
       </div>

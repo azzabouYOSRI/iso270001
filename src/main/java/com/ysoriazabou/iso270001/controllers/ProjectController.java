@@ -65,9 +65,6 @@ if (project.getBudget() != null){
     if (project.getClient() != null){
         projectExist.setClient(project.getClient());
         }
-        if (project.getEndDate() != null){
-            projectExist.setEndDate(project.getEndDate());
-        }
         if (project.getInitialized()!= null){
             projectExist.setInitialized(project.getInitialized());
         }
@@ -83,6 +80,12 @@ if (project.getBudget() != null){
         }
           if (project.getRealStartDate() != null){
             projectExist.setRealStartDate(project.getRealStartDate());}
+
+          if (project.getUrl() != null){
+            projectExist.setUrl(project.getUrl());}
+
+          if (project.getCost2() != null){
+            projectExist.setCost2(project.getCost2());}
 
         projectService.save(projectExist);
         return ResponseEntity.ok().body(projectExist);}

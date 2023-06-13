@@ -11,6 +11,7 @@ import {MatSelectChange} from "@angular/material/select";
 export class UpdateComponent extends NewComponent {
    subPhasesNames2: string[] = [];
       subPhasesParent: string[] = [];
+  private static name2: any;
 
   override submit() {
 
@@ -37,14 +38,23 @@ console.log(this.formValue);
         realStartDate: data.realStartDate,
         realEndDate: data.realEndDate,
         posistion: data.posistion,
-          cost: data.cost
+          cost: data.cost,
+          url: data.url
       });
     });
 
 }
      titleHandler() {
-    this.title = 'Update activity  '+this.data.id;``
-}
+         this.service.getById(this.data.id, "activity").subscribe(item => {
+          let data: any;
+          data = item;
+          UpdateComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Activity '" + UpdateComponent.name2 + "' update";
+      }, 100);
+
+  }
 
 title:string='';
   override dataHandler(){
@@ -53,8 +63,11 @@ title:string='';
 
                  phaseId = sessionStorage.getItem('selectedSubPhase-option');
                }
-               else {
+               else if (this.formValue.phase!==null&&this.formValue.phase!==''&&this.formValue.phase!=='-'){
                  phaseId = sessionStorage.getItem('selectedPhase-option');
+               }
+               else {
+                  phaseId = sessionStorage.getItem('selectedPhase');
                }
                  delete this.formValue.subPhase;
                delete this.formValue.phase;

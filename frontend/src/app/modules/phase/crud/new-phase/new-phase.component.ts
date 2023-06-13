@@ -16,7 +16,8 @@ import {identifierOfNode} from "@angular/compiler-cli/src/ngtsc/util/src/typescr
 })
 export class NewPhaseComponent implements OnInit {
   user: any;
-  stardate2 = new FormControl('', Validators.required);
+  date:any =new Date();
+  stardate2 = new FormControl(this.date, Validators.required);
   endDate2 = new FormControl('');
   realEndDate2 = new FormControl('');
   realStarDate2 = new FormControl('');
@@ -28,14 +29,15 @@ export class NewPhaseComponent implements OnInit {
   phaseForm = this.builder.group({
     name: this.builder.control('', Validators.required),
     description: this.builder.control('', Validators.required),
-    posistion: this.builder.control(''),
+    posistion: this.builder.control(0),
     startDate: this.stardate2,
     endDate: this.endDate2,
     realStartDate:this.realStarDate2,
+    url: this.builder.control(''),
     realEndDate: this.realEndDate2,
     isSubPhase: this.builder.control(false),
     parent: this.builder.control(''),
-    cost: this.builder.control('')
+    cost: this.builder.control(0)
 
   });
   phasesNames: any;
@@ -51,10 +53,10 @@ export class NewPhaseComponent implements OnInit {
     protected _operations: OperationsService,
     @Inject(MAT_DIALOG_DATA) public data: any,
     protected dialogref: MatDialogRef<NewPhaseComponent>,
-    private preparation: PreparationsService,
+    protected preparation: PreparationsService,
   ) {
-  }
 
+  }
   get operations(): OperationsService {
     return this._operations;
   }
@@ -64,7 +66,16 @@ export class NewPhaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(sessionStorage.getItem('subphaseTypeSwitch')=='switchToNormal'){
     this.phasesNames = this.operations.getArray('phasesNames');
+    console.log(this.phasesNames)
+      console.log('normal')
+    }
+    else if(sessionStorage.getItem('subphaseTypeSwitch')=='switchToDefault') {
+      this.phasesNames = this.operations.getArray('phasesNamesDefault')
+          console.log(this.phasesNames)
+      console.log('default')
+    }
   }
 
   formControl() {
@@ -113,8 +124,6 @@ let b: any;
 
 
   dataHandler(){
-
-
                   let idp :any ;
                  idp =   sessionStorage.getItem('selectedProject');
                   this.formValue.project = {
@@ -137,7 +146,6 @@ let b: any;
                   this.submit();
   }
 
-
   isSubPhaseHandler($event: MatCheckboxChange) {
     if ($event.checked) {
       this.subPhaseGate = true;
@@ -150,6 +158,10 @@ let b: any;
 
   submit() {
                       this.formValue.progress = 0;
+                        if(this.formValue.cost==null||this.formValue.cost=="")
+    {
+      this.formValue.cost=0;
+    }
                       this.formValue.alternateId=this._operations.generateAlternateId();
     this.service.add(this.formValue, "phase").subscribe(() => {
       if (this.formValue.isSubPhase === "true") {

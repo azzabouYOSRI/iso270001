@@ -28,6 +28,9 @@ export class OperationsService {
     const cleaned = input.replace(/\[|\]/g, ''); // Remove square brackets from string
     return cleaned.split('","').map((s) => s.replace(/"/g, '')); // Split and remove quotes from each element
   }
+  calcul( a:number, b:number):number{
+    return Number(a)+Number(b);
+  }
 
   checkPriceFormat(inputValue: string): boolean {
     if (typeof inputValue !== 'string') {
@@ -79,8 +82,41 @@ export class OperationsService {
       // allow backspace/delete/arrow keys
       return;
     }
+    else if (!pattern.test(this.inputValue + inputChar)) {
+      event.preventDefault();
+      return;
+    }
 
-    if (!pattern.test(this.inputValue + inputChar)) {
+
+    this.inputValue += inputChar;
+  }
+  keyPressPhone(event: any) {
+    const pattern = /^[0-9+]*$/;
+    const inputChar = event.key || String.fromCharCode(event.which);
+    const keyCode = event.keyCode || event.which;
+
+    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+      // allow backspace/delete/arrow keys
+      return;
+    }
+    else if (!pattern.test(this.inputValue + inputChar)) {
+      event.preventDefault();
+      return;
+    }
+
+
+    this.inputValue += inputChar;
+  }
+    keyPressNumbers(event: any) {
+    const pattern = /^[0-9]*$/;
+    const inputChar = event.key || String.fromCharCode(event.which);
+    const keyCode = event.keyCode || event.which;
+
+    if (keyCode === 8 || keyCode === 46 || keyCode === 37 || keyCode === 39) {
+      // allow backspace/delete/arrow keys
+      return;
+    }
+    else if (!pattern.test(this.inputValue + inputChar)) {
       event.preventDefault();
       return;
     }
@@ -278,17 +314,26 @@ export class OperationsService {
         element.user.typeOfUser = 'project manager'
         sessionStorage.setItem("pm", "true");
       } else {
+        if (element.user.companyName !== null && element.user.companyName !== "" && element.user.typeOfUser == "customer") {
+        this.toastr.info("companyName: " + element.user.companyName);
+        this.toastr.info("typeOfUser: " + element.user.typeOfUser);
         delete element.user.typeOfUser;
-        element.user.typeOfUser = 'member'
+        element.user.typeOfUser = 'member*'
       }
-      if (element.user.companyName !== null && element.user.companyName !== "") {
+        else if (element.user.companyName !== null && element.user.companyName !== "" && element.user.typeOfUser == "customerUser") {
         delete element.user.typeOfUser;
-        element.user.typeOfUser = element.user.companyName;
+        element.user.typeOfUser = 'member**'
+        }
+        else {
+          element.user.typeOfUser = 'member'
+        }
       }
       delete element.user.password;
       list.push(element.user);
     }
+
     return list
+
   }
 
  replaceNullsWithDash(obj: Record<string, any>): Record<string, any> {

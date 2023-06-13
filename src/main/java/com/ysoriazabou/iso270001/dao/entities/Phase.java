@@ -81,14 +81,20 @@ public class Phase {
           @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Phase> children;
 
+   @Column(name = "url")
+    private String url;
+
        @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
+       @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "parent_id",referencedColumnName = "id")
     private Phase parent;
-
     @Column(name = "is_subPhase")
     private String isSubPhase;
 
-
+ @JsonIgnore
+    @OneToMany (mappedBy="phase", fetch=FetchType.LAZY )
+    @ToString.Exclude
+    private List<Activity> listActivities;
 
 }

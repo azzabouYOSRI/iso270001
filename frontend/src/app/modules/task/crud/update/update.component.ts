@@ -16,8 +16,11 @@ export class UpdateTaskComponent extends NewTaskComponent {
   @ViewChild(MatSort) sort!: MatSort;
 
   static dataList: any;
-  override taskSubmit() {
+  private static name2: any;
+    private static name3: any;
 
+  override taskSubmit() {
+  this.formValue.progress=UpdateTaskComponent.progress;
    this.service.update(this.idx,this.formValue,"task").subscribe(() => {
         this.toastr.success('task updated Successfully');
           setTimeout(() => {
@@ -26,6 +29,7 @@ export class UpdateTaskComponent extends NewTaskComponent {
           });
   }
 
+  static progress: number = 0;
   loadData(id: any) {
     let data :any;
     this.service.getById(id,"task").subscribe(res => {
@@ -38,16 +42,30 @@ export class UpdateTaskComponent extends NewTaskComponent {
         realStartDate: data.realStartDate,
         realEndDate: data.realEndDate,
         posistion: data.posistion,
+          member: data.member.name,
+          url: data.url
       });
+      UpdateTaskComponent.progress = data.progress;
+      UpdateTaskComponent.name3=data.member.name;
     });
-
-}
+   setTimeout(() => {
+     this.name4=  UpdateTaskComponent.name3
+    },100)
+  }
 
 title:string='';
+   name4:string ='';
 
   titleHandler() {
     this.idx = sessionStorage.getItem('selectedTask');
-    this.title = 'Update task  '+this.idx;
+this.service.getById(this.idx, "task").subscribe(item => {
+          let data: any;
+          data = item;
+          UpdateTaskComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Task '" + UpdateTaskComponent.name2 + "' update";
+      }, 100);
 }
 
   override loadListSubTask(endpoint:string) {
@@ -73,12 +91,13 @@ title:string='';
     })
   }
 
+
+
   override ngOnInit() {
     super.ngOnInit();
       this.titleHandler() ;
       this.loadData(this.idx);
       this.loadListSubTask("subtask");
       this.operation2='update';
-    console.log(this.operation);
   }
   }

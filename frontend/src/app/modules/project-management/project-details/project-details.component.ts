@@ -36,4 +36,6 @@ static project :any;
       ProjectDetailsComponent.project = res;
     });
   }
+
+    protected readonly Number = Number;
 }

@@ -3,6 +3,7 @@ import {BaseListingComponent} from "../../../../utilities/imports/base-listing/b
 import {SubTaskDetailsComponent} from "../../crud/subTaskDetails/details.component";
 import {TaskDetailsComponent} from "../../crud/taskDetails/details.component";
 import {TodoListing2Component} from "../list-subtasks/listing.component";
+import {MatTableDataSource} from "@angular/material/table";
 // import {UpdateTodoComponent} from "../update/update.component";
 // import {TaskDetailsComponent} from "../taskDetails/details.component";
 
@@ -65,5 +66,24 @@ for (const element of data) {
 
   taskdetail:any = TaskDetailsComponent;
   protected readonly TodoListing2Component = TodoListing2Component;
+  isComplete: boolean = false;
+
+  showCompletedTasks() {
+    let list2: any = [];
+    for (const element of this.dataTable) {
+      if (element.progress == 100) {
+        list2.push(element);
+      }
+    }
+      this.dataSource = new MatTableDataSource (list2);
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
+      this.isComplete = true;
+  }
+
+  back() {
+  this.isComplete = false;
+    this.loadList(this.endpoint);
+  }
 }
 

@@ -36,6 +36,8 @@ export class NewProjectComponent implements OnInit {
     endDate: this.endDate2,
     realStartDate: this.realStartDate2,
     realEndDate: this.realEndDate2,
+    url:this.builder.control(''),
+    cost2:this.builder.control(''),
   });
   title: string = 'title';
   project: any;
@@ -99,6 +101,7 @@ export class NewProjectComponent implements OnInit {
   submit() {
     this.formValue.progress = 0;
     this.formValue.alternateId = this._operations.generateAlternateId();
+    this.formValue.cost2= this.formValue.cost;
     this.service.add(this.formValue, "project").subscribe(() => {
       this.toastr.success('Project added successfully.');
     });
@@ -182,7 +185,7 @@ export class NewProjectComponent implements OnInit {
     }, 200);
       setTimeout(() => {
 
- this.service.getbyidp(NewProjectComponent.idpn, "phase").subscribe(res => {
+ this.service.getbyidp(Number(NewProjectComponent.idpn), "phase").subscribe(res => {
       NewProjectComponent.newPhases = res
     });
 setTimeout(() => {
@@ -245,7 +248,7 @@ this.newPhasesHandler();
       }, 700);
       setTimeout(() => {
       },850)
-    this.service.getbyidp(NewProjectComponent.idpn,"phase").subscribe(res => {
+    this.service.getbyidp(Number(NewProjectComponent.idpn),"phase").subscribe(res => {
       NewProjectComponent.allNewPhases=res;
     })
     this.service.getAll("activity").subscribe(res => {

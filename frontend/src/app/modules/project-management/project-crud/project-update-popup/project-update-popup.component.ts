@@ -16,6 +16,7 @@ import {MatSelectChange} from "@angular/material/select";
   styleUrls: ['./project-update-popup.component.css']
 })
 export class ProjectUpdatePopupComponent extends NewProjectComponent{
+  private static name2: any;
 
    constructor(
     protected override builder: FormBuilder,
@@ -32,13 +33,22 @@ export class ProjectUpdatePopupComponent extends NewProjectComponent{
    }
 
   titleHandler() {
-    this.title = 'Update Project  '+this.data.id;
+this.service.getById(this.data.id, "project").subscribe(item => {
+          let data: any;
+          data = item;
+          ProjectUpdatePopupComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Project '" + ProjectUpdatePopupComponent.name2 + "' update";
+      }, 100);
 }
-
  loadProjectData(idp: any) {
     this.idx= idp;
     this.service.getById(idp,"project").subscribe(res => {
       this.project = res
+      // @ts-ignore
+      // @ts-ignore
+      // @ts-ignore
       this.projectForm.patchValue({
         name: this.project.name,
         description: this.project.description,
@@ -48,6 +58,8 @@ export class ProjectUpdatePopupComponent extends NewProjectComponent{
         endDate: this.project.endDate,
         realStartDate: this.project.realStartDate,
         realEndDate: this.project.realEndDate,
+        url: this.project.url,
+        cost2: this.project.cost2
       });
     sessionStorage.setItem('idc',this.project.client.idu);
     });
@@ -104,7 +116,7 @@ export class ProjectUpdatePopupComponent extends NewProjectComponent{
 
 
   override submit() {
-     console.log(this.formValue)
+         this.formValue.cost2= this.formValue.cost;
          this.service.update(this.idx, this.formValue,"project").subscribe(() => {
       this.toastr.success('Updated successfully.');
       // this.preparation.storeCompanyNames();

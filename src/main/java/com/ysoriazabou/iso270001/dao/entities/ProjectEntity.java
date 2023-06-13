@@ -24,6 +24,9 @@ public class ProjectEntity {
     @Column(name = "idp", nullable = false)
     private long idp;
 
+    @Column(name = "url")
+    private String url;
+
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -61,7 +64,7 @@ public class ProjectEntity {
     private String budget;
 
     @Column(name = "cost")
-    private String cost;
+    private String Cost2;
 
     @Column(name = "initialized")
     private String initialized;
@@ -89,5 +92,14 @@ public class ProjectEntity {
     @JsonIgnore
     @OneToMany (mappedBy="project", fetch=FetchType.LAZY )
     @ToString.Exclude
+        @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Phase> phaseList;
+
+
+
+    @JsonIgnore
+    @OneToMany (mappedBy="project", fetch=FetchType.LAZY )
+    @ToString.Exclude
+        @OnDelete(action = OnDeleteAction.CASCADE)
+    private List<Notification> notificationList;
 }

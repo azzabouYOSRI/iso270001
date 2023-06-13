@@ -1,3 +1,5 @@
+ <button mat-button color="accent" *ngIf="!isComplete"  (click)="this.showCompletedTasks()"  aria-label="New task">Show completed tasks</button>
+    <button mat-button color="accent" *ngIf="isComplete"  (click)="this.back()"  aria-label="New task">Back</button>
 
 
 <div class="mat-elevation-z8">

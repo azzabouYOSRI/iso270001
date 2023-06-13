@@ -12,6 +12,7 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrls: ['./listing.component.css']
 })
 export class ActivityListingComponent extends BaseListingComponent implements OnInit,AfterViewInit{
+  private static name2: any;
     ngAfterViewInit(): void {
           this.preparation.storePhases()
     }
@@ -29,8 +30,14 @@ export class ActivityListingComponent extends BaseListingComponent implements On
 
   override titleHandler(){
 
-this.id=sessionStorage.getItem("selectedPhase");
-      this.title = "phase "+this.id + " activities";
+              this.service.getById(sessionStorage.getItem("selectedPhase"), "phase").subscribe(item => {
+          let data: any;
+          data = item;
+          ActivityListingComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Phase '" + ActivityListingComponent.name2 + "' activities";
+      }, 100);
   }
    id:any;
   override filter(list:any) : string[] {
@@ -43,11 +50,7 @@ this.id=sessionStorage.getItem("selectedPhase");
       }
   return list2
 }
-
   override displayedColumns: string[] = [ 'name','order','details','tasks','update','delete'];
-
-
-
   c :any = NewComponent;
   d:any = DeleteComponent;
   u:any = UpdateComponent;

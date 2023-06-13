@@ -10,16 +10,20 @@
             </mat-form-field>
            <mat-form-field class="example-fit-width">
               <mat-label>order</mat-label>
-              <input matInput formControlName="posistion" >
+              <input matInput formControlName="posistion"  (keydown)="this.operations.keyPressNumbers($event)">
             </mat-form-field>
 
-          <mat-form-field class="example-fit-width field-spacer">
+          <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
                 <input matInput formControlName="description" >
               </mat-form-field>
-          <mat-form-field class="example-fit-width">
+          <mat-form-field class="example-fit-width field-spacer">
                 <mat-label>cost</mat-label>
-                <input matInput formControlName="cost" >
+                <input matInput formControlName="cost"  (keydown)="this.operations.keyPress($event)">
+              </mat-form-field>
+               <mat-form-field class="example-fit-width">
+                <mat-label>url</mat-label>
+                <input matInput formControlName="url" >
               </mat-form-field>
 
               <mat-form-field appearance="fill" class="example-fit-width field-spacer">

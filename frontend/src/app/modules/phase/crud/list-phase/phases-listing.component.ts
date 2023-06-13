@@ -22,6 +22,16 @@ export class PhasesListingComponent extends BaseListingComponent implements OnIn
     this.endpoint = "phase";
     this.loadList(this.endpoint);
     this.titleHandler();
+        if(sessionStorage.getItem('homeDefaultPm')=='true'){
+          this.default=true;
+
+sessionStorage.setItem('subphaseTypeSwitch', 'switchToDefault');
+        }
+        else {
+          this.default=false;
+                  sessionStorage.setItem('subphaseTypeSwitch', 'switchToNormal');
+        }this.preparation.storePhases();
+         this.preparation.storePhasesForDefault();
    }
 
   override title : string = "title";
@@ -32,7 +42,7 @@ export class PhasesListingComponent extends BaseListingComponent implements OnIn
 
     if (this.subPhaseFilter == "true" ) {
       this.id=sessionStorage.getItem("selectedPhase");
-        this.title = "phase " + this.id + " sub phases";
+        this.title = "phase " + this.phasename + " sub phases";
     }
     else {
       if (sessionStorage.getItem("default") == "true") {
@@ -43,7 +53,9 @@ export class PhasesListingComponent extends BaseListingComponent implements OnIn
           data = item;
           PhasesListingComponent.name2 = data.name;
         });
+        setTimeout(() => {
         this.title = "project " + PhasesListingComponent.name2 + " phases";
+      }, 100);
       }
     }
   }
@@ -81,11 +93,12 @@ else {
 
   return list2
 }
-
-filterSubPhase(id:number){
+phasename:string="";
+filterSubPhase(phase:any){
+  this.phasename=phase.name;
     this.backButton=true;
   sessionStorage.setItem("subPhaseFilter","true");
-  sessionStorage.setItem("selectedPhase",id.toString());
+  sessionStorage.setItem("selectedPhase",phase.id.toString());
   this.loadList(this.endpoint);
 }
 
@@ -96,6 +109,7 @@ filterSubPhase(id:number){
   u:any = UpdatePhaseComponent;
   detail:any = PhaseDetailsComponent;
   allowModification: boolean = false;
+  default: any;
 
   allowModificationHandler(){
 

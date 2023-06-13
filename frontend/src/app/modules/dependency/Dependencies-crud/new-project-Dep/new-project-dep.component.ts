@@ -15,9 +15,9 @@ import {ProjectDepUpdatePopupComponent} from "../project-dep-update-popup/projec
 export class NewProjectDepComponent {
   user: any;
   types: string[] = ['standard', 'framework', 'logistic', 'other'];
-  private cost: number = 0;
+  private cost2: number = 0;
   formValue: any;
-  protected idx: any;
+  protected idx: number = 0;
   protected projectDep: any;
   protected title:string = 'Add New Project Dependency';
 
@@ -63,30 +63,32 @@ export class NewProjectDepComponent {
         this.formValue.project = {
           idp: sessionStorage.getItem('selectedProject')
         };
-        this.submit(0);
+        this.submit(this.idx);
 
       }
     } else {
       this.toastr.warning('Please enter valid data.')
     }
   }
-static cost:any;
+static cost2:any;
   submit(idx: number) {
     this.service.add(this.formValue, "project-dep").subscribe(() => {
       this.toastr.success('Project Dependency Added Successfully');
+              this.dialogref.close();
+
     });
     setTimeout(() => {
       let p :any ;
       this.service.getById(sessionStorage.getItem('selectedProject'), "project").subscribe((data) => {
     p = data;
-    NewProjectDepComponent.cost = p.cost;
+    NewProjectDepComponent.cost2 = p.cost2;
       });
      }, 100);
     setTimeout(() => {
 
-    let cost = this.formValue.cost+NewProjectDepComponent.cost;
+    let cost = this.formValue.cost+NewProjectDepComponent.cost2;
       let id:any =sessionStorage.getItem('selectedProject')
-    this.service.update(id,{cost:cost}, "project").subscribe(() => {
+    this.service.update(id,{cost2:cost}, "project").subscribe(() => {
       // this.toastr.success('Project cost updated Successfully');
     });
            }, 200);

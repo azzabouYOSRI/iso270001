@@ -18,7 +18,8 @@ import {MatSelectChange} from "@angular/material/select";
 })
 export class NewTaskComponent implements OnInit {
   user: any;
-  stardate2 = new FormControl('', Validators.required);
+  date: any = new Date();
+  stardate2 = new FormControl(this.date, Validators.required);
   endDate2 = new FormControl('');
   realEndDate2 = new FormControl('');
   realStarDate2 = new FormControl('');
@@ -28,9 +29,11 @@ export class NewTaskComponent implements OnInit {
   TaskForm = this.builder.group({
     name: this.builder.control('', Validators.required),
     description: this.builder.control('', Validators.required),
-    posistion: this.builder.control(''),
+    posistion: this.builder.control(0),
     startDate: this.stardate2,
     endDate: this.endDate2,
+    cost: this.builder.control(0),
+    url: this.builder.control(''),
     realStartDate: this.realStarDate2,
     realEndDate: this.realEndDate2,
     activity: this.builder.control(''),
@@ -42,6 +45,7 @@ export class NewTaskComponent implements OnInit {
     posistion: this.builder.control(''),
     done: this.builder.control(''),
     task: this.builder.control(''),
+    url: this.builder.control('')
   });
 
   idx: any;
@@ -67,7 +71,7 @@ export class NewTaskComponent implements OnInit {
   noSubtask: boolean = false;
   membersId: any = []
   membersName: any = []
-
+allowAddNewSubatsks = true;
   constructor(
     protected builder: FormBuilder,
     protected service: HttpService,
@@ -191,6 +195,10 @@ export class NewTaskComponent implements OnInit {
   }
 
   taskSubmit() {
+      if(this.formValue.cost==null||this.formValue.cost=="")
+    {
+      this.formValue.cost=0;
+    }
     this.alternateId = this.operations.generateAlternateId();
     this.formValue.alternateId = this.alternateId;
     this.formValue.progress = 0;
@@ -204,6 +212,7 @@ export class NewTaskComponent implements OnInit {
     this.service.add(this.formValue, "task").subscribe(() => {
       this.taskAdded = true;
       this.noSubtask=true;
+      this.allowAddNewSubatsks = true;
       this.toastr.success('Task added successfully');
     });
   }
@@ -249,6 +258,8 @@ static insertedTask: any;
         // setTimeout(() => {
       this.service.add(this.formValue, "subtask").subscribe(() => {
         this.toastr.info('Default added');
+        this.allowAddNewSubatsks = false;
+        this.noSubtask = false;
       });
             // }, 100);
 

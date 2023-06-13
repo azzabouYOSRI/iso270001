@@ -7,27 +7,13 @@
   </div>
   <mat-card-content>
     <div class="info">
-      <div class="project-field-label">
-        <span>Name:</span>
-        <span>Description:</span>
-        <span></span>
-                <span></span>
-                <span></span>
-                        <span></span>
+      <div class="project-field-label"> <span>Name:</span> </div> <div class="project-field-value"> <span>{{Data.id.name}}</span> </div>
+      <div class="project-field-label"> <span>Description:</span> </div> <div class="project-field-value"> <span>{{Data.id.description}}</span> </div>
+      <div class="project-field-label"> <span>Cost:</span> </div> <div class="project-field-value"> <span>{{Data.id.cost}}</span> </div>
+      <div class="project-field-label"> <span>Type:</span> </div> <div class="project-field-value"> <span>{{Data.id.type}}</span> </div>
+      <div class="project-field-label"> <span>Url:</span> </div>
+      <div class="project-field-value"> <span><a [href]="'https://'+Data.id.url" target="_blank">{{ Data.id.url}}</a></span> </div>
 
-        <span>cost:</span>
-        <span>type:</span>
-        <span>url:</span>
-
-
-      </div>
-      <div class="project-field-value">
-        <span>{{Data.id.name}}</span>
-        <span>{{Data.id.description}}</span>
-                <span>{{Data.id.cost}}</span>
-        <span>{{Data.id.type}}</span>
-        <span>{{Data.id.url}}</span>
-      </div>
     </div>
   </mat-card-content>
 </mat-card>

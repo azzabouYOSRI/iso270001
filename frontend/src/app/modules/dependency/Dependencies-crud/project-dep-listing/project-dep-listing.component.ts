@@ -16,6 +16,7 @@ import {DetailsComponent} from "../../dep-details/details.component";
   styleUrls: ['./project-dep-listing.component.css']
 })
 export class ProjectDepListingComponent extends BaseListingComponent implements OnInit{
+  private static name2: any;
 
 
   override ngOnInit(): void {
@@ -27,7 +28,15 @@ export class ProjectDepListingComponent extends BaseListingComponent implements 
   override title : string = "title";
 
   override titleHandler(){
-    this.title = "project "+ sessionStorage.getItem("selectedProject")+ " dependencies";
+
+        this.service.getById(sessionStorage.getItem("selectedProject"), "project").subscribe(item => {
+          let data: any;
+          data = item;
+          ProjectDepListingComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Project '" + ProjectDepListingComponent.name2 + "' dependencies";
+      }, 100);
   }
 
 

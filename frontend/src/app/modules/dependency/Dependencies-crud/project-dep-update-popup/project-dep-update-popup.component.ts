@@ -15,6 +15,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
   styleUrls: ['./project-dep-update-popup.component.css']
 })
 export class ProjectDepUpdatePopupComponent extends NewProjectDepComponent implements OnInit {
+  private static name2: any;
 
      constructor(
     protected override builder: FormBuilder,
@@ -28,8 +29,6 @@ export class ProjectDepUpdatePopupComponent extends NewProjectDepComponent imple
 ) {
      super(builder,service,router,toastr,_operations,data,dialogref)
    }
-
-
      loadProjectDepData(idpd: any) {
     this.idx= idpd;
     this.service.getById(idpd,"project-dep").subscribe
@@ -44,8 +43,15 @@ export class ProjectDepUpdatePopupComponent extends NewProjectDepComponent imple
 
 }
      titleHandler() {
-    this.title = 'Update Project dependency  '+ this.data.id;
-}
+     this.service.getById(this.data.id, "project-dep").subscribe(item => {
+          let data: any;
+          data = item;
+          ProjectDepUpdatePopupComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Dependency '" + ProjectDepUpdatePopupComponent.name2 + "' update";
+      }, 100);
+     }
  ngOnInit() {
      if (this.data.id != '' && this.data.id != null && this.data.id != 0){
       this.titleHandler() ;
@@ -55,37 +61,51 @@ export class ProjectDepUpdatePopupComponent extends NewProjectDepComponent imple
   }
 
   override submit(idx:number) {
+               this.fixdepency();
    this.service.update(idx,this.formValue,"project-dep").subscribe(() => {
         this.toastr.success('Project Dependency Added Successfully');
+        this.dialogref.close();
           });
   }
-static cost2 :any;
+static cost3 :any;
    fixdepency() {
+     let cost4 : number = 0;
 
   setTimeout(() => {
       let p :any ;
       let pd :any ;
       this.service.getById(sessionStorage.getItem('selectedProject'), "project").subscribe((data) => {
     p = data;
-    ProjectDepUpdatePopupComponent.cost = p.cost;
+    ProjectDepUpdatePopupComponent.cost2 = p.cost2;
 
       });
          this.service.getById(this.idx, "project-dep").subscribe((data) => {
     p = data;
-    ProjectDepUpdatePopupComponent.cost = p.cost;
+    ProjectDepUpdatePopupComponent.cost3 = p.cost;
 
       });
      }, 100);
     setTimeout(() => {
-
-    let cost = Number(ProjectDepUpdatePopupComponent.cost) - Number(ProjectDepUpdatePopupComponent.cost2);
-    cost = Number(cost) + Number(this.formValue.cost);
+    let cost5 :number = (Number(ProjectDepUpdatePopupComponent.cost2) - Number(ProjectDepUpdatePopupComponent.cost3));
+    setTimeout(() => {
+       // cost4 = Number(cost) + ;
+      // cost4 = this.operations.calcul(Number(this.formValue), cost);
+      // console.log(this.formValue.cost);
       let id:any =sessionStorage.getItem('selectedProject')
-    this.service.update(id,cost, "project").subscribe(() => {
+      sessionStorage.setItem('costy',String(cost5));
+    this.service.update(id,{cost:cost5}, "project").subscribe(() => {
       this.toastr.success('Project cost updated Successfully');
     });
+          },100)
            }, 200);
 
+    setTimeout(() => {
+            let id:any =sessionStorage.getItem('selectedProject')
+let cost6= Number (sessionStorage.getItem('costy'))+Number(this.formValue.cost);
+ this.service.update(id,{cost2:cost6}, "project").subscribe(() => {
+      this.toastr.success('Project cost updated Successfully');
+    });
+    },300)
 }
 
 }

@@ -22,6 +22,7 @@ export class ProjectListingComponent extends BaseListingComponent implements OnI
      this.loadList(this.endpoint);
          this.preparation.checkPmExistence()
      sessionStorage.setItem('default','false' );
+      sessionStorage.setItem('homeDefaultPm','false' );
     }
 
 
@@ -30,17 +31,25 @@ export class ProjectListingComponent extends BaseListingComponent implements OnI
 
 projectsRoles:any=[];
 
-  override filter(list: any): string[] {
+  override filter(list: any): any {
+    let list2: any = [];
     let projects: string[] = this.operations.getArray('projects');
+    let projectsAdmin: string[] = this.operations.getArray('projectsAdmin');
       let projectsRoles: string[] = this.operations.getArray('projectsRoles');
     if (sessionStorage.getItem('type')=='admin'){
-      for (let i = 0; i < projects.length; i++) {
-        if (projectsRoles[i] == 'true') {
-          list[i].isPm = true;
+      for (const element of list) {
+        if (element.alternateId !== 'default') {
+          list2.push(element);
         }
       }
-      return list
+        for (let i = 0; i < list.length; i++) {
+            if (projectsRoles[i] == 'true') {
+              list2[i].isPm = true;
+            }
+          }
+        return list2
     }
+
     else {
       let userAdedToThemRole: any = [];
       let userAdedToThem: any = [];

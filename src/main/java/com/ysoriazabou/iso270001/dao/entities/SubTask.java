@@ -40,7 +40,7 @@ public class SubTask {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_task", referencedColumnName = "id")
+    @JoinColumn(name = "id_task", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Task task;

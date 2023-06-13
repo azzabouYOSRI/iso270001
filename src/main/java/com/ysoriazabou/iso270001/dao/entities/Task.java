@@ -32,6 +32,9 @@ public class Task {
         @Column(name = "validated")
     private String validated;
 
+        @Column(name = "url")
+    private String url;
+
     @Column(name = "start_date")
     @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
@@ -70,14 +73,14 @@ public class Task {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_activity", referencedColumnName = "id")
+    @JoinColumn(name = "id_activity", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Activity activity;
 
      @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_member", referencedColumnName = "id")
+    @JoinColumn(name = "id_member", referencedColumnName = "id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Member member;

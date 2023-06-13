@@ -16,7 +16,8 @@ export class MembersListingComponent extends BaseListingComponent implements OnI
   pm: boolean = false;
   c: any = NewMemberComponent;
   d: any = MemberDeleteComponent;
-  override displayedColumns: string[] = [ 'name', 'lastname', 'type', 'email', 'phone', 'delete'];
+  override displayedColumns: string[] = [ 'name', 'lastname', 'type','companyName', 'email', 'phone', 'delete'];
+  private static name2: any;
 
   override ngOnInit(): void {
     this.endpoint = "member";
@@ -30,9 +31,17 @@ export class MembersListingComponent extends BaseListingComponent implements OnI
   }
 
   override titleHandler() {
-    this.title = "project " + sessionStorage.getItem("selectedProject") + " members";
+          this.service.getById(sessionStorage.getItem("selectedProject"), "project").subscribe(item => {
+          let data: any;
+          data = item;
+          MembersListingComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Project " + MembersListingComponent.name2 + " members";
+      }, 100);
   }
 
+  // @ts-ignore
   override filter(list: any): any[] {
     this.allowAddMember = this.operations.isPmHandler();
     let object: any = [];

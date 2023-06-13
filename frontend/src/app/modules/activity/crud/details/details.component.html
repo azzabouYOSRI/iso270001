@@ -1,37 +1,33 @@
 <mat-card class="card">
   <div class="back-button">
-    <button mat-icon-button mat-dialog-close="">
+    <button mat-dialog-close="" mat-icon-button>
       <mat-icon>x</mat-icon>
     </button>
     <span>Close</span>
   </div>
   <mat-card-content>
     <div class="info">
-      <div class="project-field-label">
-        <span>Name:</span>
-        <span>Description:</span>
-                <span>cost:</span>
-        <span>Start Date:</span>
-        <span>End Date:</span>
-        <span>progress:</span>
-        <span>Real start date:</span>
-        <span>Real end date :</span>
-        <span>Order:</span>
-
-
+      <div class="project-field-label"><span>Name:</span></div>
+      <div class="project-field-value"><span>{{Data.id.name}}</span></div>
+      <div class="project-field-label"><span>Description:</span></div>
+      <div class="project-field-value"><span>{{Data.id.description}}</span></div>
+      <div class="project-field-label"><span>cost:</span></div>
+      <div class="project-field-value"><span>{{Data.id.cost}}</span></div>
+      <div class="project-field-label"><span>url:</span></div>
+      <div class="project-field-value"> <span><a [href]="'https://'+Data.id.url" target="_blank">{{ Data.id.url}}</a></span> </div>
+      <div class="project-field-label"> <span>Start Date:</span> </div>
+        <div  class="project-field-value"> <span> {{Data.id.startDate}} </span> </div>
+      <div class="project-field-label"> <span>End Date:</span> </div> <div
+          class="project-field-value"> <span>{{Data.id.endDate}}</span> </div>
+      <div class="project-field-label"> <span>progress:</span> </div> <div
+          class="project-field-value"> <span>{{Number(Data.id.progress).toFixed(2)}} %</span> </div>
+      <div class="project-field-label"> <span>Real start date:</span> </div> <div
+          class="project-field-value"> <span>{{Data.id.realStartDate}}</span> </div>
+      <div class="project-field-label"> <span>Real end date :</span> </div> <div
+          class="project-field-value"> <span>{{Data.id.realEndDate}}</span> </div>
+      <div class="project-field-label"> <span>Order:</span> </div> <div
+          class="project-field-value"> <span>{{Data.id.posistion}}</span> </div>
       </div>
-      <div class="project-field-value">
-        <span>{{Data.id.name}}</span>
-        <span>{{Data.id.description}}</span>
-                <span>{{Data.id.cost}}</span>
-        <span>{{Data.id.startDate}}</span>
-        <span>{{Data.id.endDate}}</span>
-        <span>{{Data.id.progress}}</span>
-       <span>{{Data.id.realStartDate}}</span>
-       <span>{{Data.id.realEndDate}}</span>
-        <span>{{Data.id.posistion}}</span>
-      </div>
-    </div>
   </mat-card-content>
 </mat-card>
 

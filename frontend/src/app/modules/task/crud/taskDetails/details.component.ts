@@ -16,4 +16,5 @@ export class TaskDetailsComponent extends BaseDetailsComponent implements OnInit
   }
 
 
+    protected readonly Number = Number;
 }

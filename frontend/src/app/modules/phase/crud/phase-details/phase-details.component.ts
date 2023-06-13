@@ -22,4 +22,5 @@ export class PhaseDetailsComponent extends BaseDetailsComponent implements OnIni
   }
 
 
+  protected readonly Number = Number;
 }

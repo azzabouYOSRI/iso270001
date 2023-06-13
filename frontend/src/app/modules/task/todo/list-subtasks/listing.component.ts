@@ -3,6 +3,7 @@ import {BaseListingComponent} from "../../../../utilities/imports/base-listing/b
 import {SubTaskDetailsComponent} from "../../crud/subTaskDetails/details.component";
 import {TaskDetailsComponent} from "../../crud/taskDetails/details.component";
 import {UpdateComponent} from "../update/update.component";
+import {MatTableDataSource} from "@angular/material/table";
 // import {UpdateTodoComponent} from "../update/update.component";
 // import {TaskDetailsComponent} from "../taskDetails/details.component";
 
@@ -12,6 +13,7 @@ import {UpdateComponent} from "../update/update.component";
   styleUrls: ['./listing.component.css']
 })
 export class TodoListing2Component extends BaseListingComponent implements OnInit{
+   isComplete: boolean= false;
   override ngOnInit(): void {
     this.endpoint = "subtask";
     this.loadList(this.endpoint);
@@ -54,5 +56,23 @@ export class TodoListing2Component extends BaseListingComponent implements OnIni
   });
   }, 100);
 }
+
+  showCompletedTasks() {
+    let list2: any = [];
+    for (const element of this.dataTable) {
+      if (element.done == true) {
+        list2.push(element);
+      }
+    }
+      this.dataSource = new MatTableDataSource (list2);
+      this.dataSource.paginator = this.paginator
+      this.dataSource.sort = this.sort;
+      this.isComplete = true;
+  }
+
+  back() {
+  this.isComplete = false;
+    this.loadList(this.endpoint);
+  }
 }
 

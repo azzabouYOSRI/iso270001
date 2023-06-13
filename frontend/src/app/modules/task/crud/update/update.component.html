@@ -8,7 +8,7 @@
   <mat-card-header>
     <h2>Update Task </h2>
   </mat-card-header>
-  <mat-card-content>
+<mat-card-content>
     <form (ngSubmit)="taskformControl()" [formGroup]="TaskForm" class="example-form">
       <mat-form-field class="example-fit-width field-spacer">
         <mat-label>Name</mat-label>
@@ -17,12 +17,27 @@
       <mat-form-field class="example-fit-width">
         <mat-label>order</mat-label>
         <input formControlName="posistion" matInput>
-      </mat-form-field>
 
-      <mat-form-field class="example-full-width">
+         </mat-form-field>
+         <mat-form-field class="example-full-width">
         <mat-label>Description</mat-label>
         <input formControlName="description" matInput>
       </mat-form-field>
+        <mat-form-field class="example-fit-width field-spacer">
+        <mat-label>cost</mat-label>
+        <input formControlName="cost" matInput>
+      </mat-form-field>
+        <mat-form-field class="example-fit-width ">
+        <mat-label>url</mat-label>
+        <input formControlName="url" matInput>
+      </mat-form-field>
+
+        <mat-form-field class="example-full-width  ">
+            <mat-label>member: </mat-label>
+              <mat-select (selectionChange)="onOptionSelected($event)" formControlName="member">
+                <mat-option *ngFor="let name of membersName" [value]="name" > {{name}}</mat-option>
+              </mat-select>
+          </mat-form-field>
 
       <mat-form-field appearance="fill" class="example-fit-width field-spacer">
         <mat-label>Choose the starting date</mat-label>
@@ -41,7 +56,7 @@
       </mat-form-field>
       <div class="align">
         <button class="btn-ui" color="primary" mat-raised-button>Submit</button>
-        <a (click)="taskWithoutSubTaskSubmit()" *ngIf="noSubtask" color="accent" mat-raised-button>No subTasks</a>
+        <a (click)="taskWithoutSubTaskSubmit()" *ngIf="noSubtask" color="accent" mat-raised-button>Default subtask</a>
       </div>
     </form>
   </mat-card-content>

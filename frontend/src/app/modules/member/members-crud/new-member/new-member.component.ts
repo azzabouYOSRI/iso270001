@@ -8,6 +8,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {MatSelectChange} from "@angular/material/select";
 import {PreparationsService} from "../../../../utilities/service/preparations/preparations.service";
 
+
+
 @Component({
   selector: 'app-new-member',
   templateUrl: './new-member.component.html',
@@ -89,8 +91,36 @@ export class NewMemberComponent {
     this.members = this.operations.getArray('membersNames');
     this.users = this.operations.getArray('usersNames');
     this.ids = this.operations.getArray('usersIds');
-    this.names = this.operations.filter(this.users, this.members)
+    // this.flagPeople(this.users, this.members);
+    this.names = this.operations.filter(this.users, this.members);
   }
+
+   flagPeople(users: any, members: any) {
+   let users2: any[]=[];
+   let members2: any[]=[];
+     for (const user of users) {
+           if (user.typeOfUser === 'customer') {
+         user.name = user.name + '*';
+       }
+       if (user.typeOfUser === 'customerUser') {
+          user.name = user.name + '**';
+       }
+       users2.push(user);
+     }
+     for (const member of members) {
+       if (member.user.typeOfUser === 'customer') {
+         member.user.name = member.user.name + '*';
+       }
+       if (member.user.typeOfUser === 'customerUser') {
+          member.user.name = member.user.name + '**';
+       }
+     members2.push(member);
+     }
+     this.users = users2;
+      this.members = members2;
+      console.log(users2);
+      console.log(members2);
+   }
 
   onOptionSelected($event: MatSelectChange) {
     this.operations.searchIdByName($event.value,this.users,this.ids,'User');

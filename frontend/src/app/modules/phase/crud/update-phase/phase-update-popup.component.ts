@@ -1,7 +1,5 @@
 import {Component, Inject} from '@angular/core';
-
 import {NewPhaseComponent} from "../new-phase/new-phase.component";
-
 
 @Component({
     selector: 'app-phase-update',
@@ -9,6 +7,7 @@ import {NewPhaseComponent} from "../new-phase/new-phase.component";
   styleUrls: ['./phase-update.component.css']
 })
 export class UpdatePhaseComponent extends NewPhaseComponent {
+  private static name2: any;
 
 
   override submit() {
@@ -21,6 +20,8 @@ if (this.formValue.isSubPhase === "true") {
 
       }
           setTimeout(() => {
+            this.preparation.storePhases();
+         this.preparation.storePhasesForDefault();
               this.dialogref.close();
       }, 500);
           });
@@ -54,7 +55,8 @@ if (this.formValue.isSubPhase === "true") {
         realStartDate: phase.realStartDate,
         realEndDate: phase.realEndDate,
         posistion: phase.posistion,
-          cost: phase.cost
+          cost: phase.cost,
+          url: phase.url
       });
       }
 
@@ -63,8 +65,14 @@ if (this.formValue.isSubPhase === "true") {
 
 }
      titleHandler() {
-    this.title = 'Update phase  '+this.data.id;
-}
+this.service.getById(this.data.id, "phase").subscribe(item => {
+          let data: any;
+          data = item;
+          UpdatePhaseComponent.name2 = data.name;
+        });
+        setTimeout(() => {
+        this.title = "Phase '" + UpdatePhaseComponent.name2 + "' update";
+      }, 100);}
 
 
 

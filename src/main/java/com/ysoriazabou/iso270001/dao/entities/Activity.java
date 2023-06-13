@@ -34,6 +34,9 @@ public class Activity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date startDate;
 
+    @Column(name = "url")
+    private String url;
+
   @Temporal(TemporalType.DATE)
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name = "end_date")
@@ -68,7 +71,7 @@ public class Activity {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_phase", referencedColumnName = "id")
+    @JoinColumn(name = "id_phase", referencedColumnName = "id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private Phase phase;

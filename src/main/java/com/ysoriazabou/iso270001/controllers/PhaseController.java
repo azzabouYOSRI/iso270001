@@ -83,6 +83,9 @@ public class PhaseController {
         if (phase.getIsSubPhase()!= null){
             exist.setIsSubPhase(phase.getIsSubPhase());
         }
+        if (phase.getUrl()!= null){
+            exist.setUrl(phase.getUrl());
+        }
 
 
 phaseService.save(exist);

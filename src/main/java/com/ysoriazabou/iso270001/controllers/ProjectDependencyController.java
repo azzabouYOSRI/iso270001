@@ -1,4 +1,5 @@
 package com.ysoriazabou.iso270001.controllers;
+
 import com.ysoriazabou.iso270001.dao.entities.ProjectDependency;
 import com.ysoriazabou.iso270001.logic.services.ProjectDependencyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,12 @@ public class ProjectDependencyController {
                 if (projectDependency.getUrl() != null){
         projectDependencyExist.setUrl(projectDependency.getUrl());
                 }
-        projectDependenciesService.save(projectDependency);
-        return ResponseEntity.ok().body(projectDependency);
+        projectDependenciesService.save(projectDependencyExist);
+        return ResponseEntity.ok().body(projectDependencyExist);
+    }
+
+     @GetMapping("/allbyproject/{id}")
+    public ResponseEntity<List<ProjectDependency>> findAllByProject(@PathVariable long id){
+        return ResponseEntity.ok().body(projectDependenciesService.findAllByProjectId(id));
     }
 }

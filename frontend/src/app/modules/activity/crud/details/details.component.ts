@@ -16,4 +16,5 @@ export class DetailsComponent extends BaseDetailsComponent implements OnInit {
   }
 
 
+    protected readonly Number = Number;
 }

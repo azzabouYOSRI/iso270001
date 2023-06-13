@@ -87,6 +87,9 @@ public class TaskController {
         if (task.getChildDones() != null){
             exist.setChildDones(task.getChildDones());
         }
+       if (task.getUrl() != null){
+            exist.setUrl(task.getUrl());
+        }
 
 
 taskService.save(exist);

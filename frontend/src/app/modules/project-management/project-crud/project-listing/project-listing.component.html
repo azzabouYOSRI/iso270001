@@ -1,3 +1,6 @@
+
+
+  <button mat-button color="accent" *ngIf="isAdmin"  (click)="this.operations.goTo('new-project')"  aria-label="New project">New project</button>
 <div class="mat-elevation-z8">
   <table mat-table matSort [dataSource]="dataSource">
     <caption>All projects</caption>

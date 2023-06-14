@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.OnDelete;
@@ -30,27 +29,32 @@ public class Notification {
 
     @Column(name="operation", nullable = false)
     private String operation;
+
+
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     @Column(name="date", nullable = false)
     private Date date;
 
-    @Column(name="table", nullable = false)
-    private String table;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @Column(name="affected_table", nullable = false)
+    private String affectedTable;
+
+     @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idproject", referencedColumnName = "idp")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @ToString.Exclude
+    private ProjectEntity project;
+
+     @Column(name="victim")
+    private String victim;
+
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "iduser", referencedColumnName = "idu", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private UserEntity user;
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "idproject", referencedColumnName = "idp",nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @ToString.Exclude
-    @NonNull
-    private ProjectEntity project;
 
 }

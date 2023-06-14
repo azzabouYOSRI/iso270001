@@ -95,11 +95,11 @@ public class ProjectEntity {
         @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Phase> phaseList;
 
-
-
-    @JsonIgnore
+        @JsonIgnore
     @OneToMany (mappedBy="project", fetch=FetchType.LAZY )
     @ToString.Exclude
         @OnDelete(action = OnDeleteAction.CASCADE)
-    private List<Notification> notificationList;
+    private List<Notification> notificationsList;
+
+
 }

@@ -62,6 +62,15 @@ export class BaseListingComponent implements OnInit{
             list= this.operations.replaceNullsWithDash(list);
             this.dataTable = list;
       list = this.filter(list)
+      let wr:any[]=[];
+      if (this.endpoint=='user') {
+        for (const i of list) {
+          if(i.name != 'root'|| i.lastName != 'root'){
+            wr.push(i);
+          }
+        }
+        list=wr;
+      }
       this.dataSource = new MatTableDataSource (list);
       this.dataSource.paginator = this.paginator
       this.dataSource.sort = this.sort;

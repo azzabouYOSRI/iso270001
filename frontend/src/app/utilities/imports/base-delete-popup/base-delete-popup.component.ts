@@ -18,6 +18,7 @@ export class BaseDeletePopupComponent implements OnInit {
   protected object: any;
   protected idx: any;
   message = 'Default Label';
+  private static Name: string;
   constructor(
     protected service: HttpService,
     protected toastr: ToastrService,
@@ -36,8 +37,26 @@ export class BaseDeletePopupComponent implements OnInit {
     if (this.data.id != '' && this.data.id != null) {
       this.loadData(this.data.id,this.data.endpoint);
     }
+    this.userNameHandler();
   }
   endpoint = '';
+
+  userNameHandler(){
+  let data: any;
+  this.service.getById(this.idx,"user").subscribe(res => {
+data=res;
+if(this.endpoint=='user'){
+  BaseDeletePopupComponent.Name= data.name+" "+data.lastname;
+}
+else if(this.endpoint=='member'){
+  BaseDeletePopupComponent.Name= data.user.name+" "+data.user.lastname;
+}
+else {
+BaseDeletePopupComponent.Name= data.name;
+}
+
+  });
+}
 
   proceedDelete() {
         this.fixdepency();
@@ -56,6 +75,22 @@ setTimeout(() => {
       if (this.endpoint === 'member'&& deletedPm === 'true'){
         sessionStorage.setItem('addedPm', 'false');
       }
+// if (this.endpoint === 'user') {
+  let notification = {
+    message: sessionStorage.getItem('userFullName') + ' did a reset password for : ' + BaseDeletePopupComponent.Name,
+    date: new Date().getFullYear() + "-" + (new Date().getMonth()) + "-" + new Date().getDay(),
+    type: 'admin',
+    operation: 'other',
+    affectedTable: 'user',
+    user: {
+      idu: sessionStorage.getItem('idu'),
+    }
+  }
+// }
+      console.log(notification);
+      this.service.add(notification, "notification").subscribe(() => {
+
+      });
       // if (this.endpoint=='members'){
       //   this.router.navigate(['members'])
       // }

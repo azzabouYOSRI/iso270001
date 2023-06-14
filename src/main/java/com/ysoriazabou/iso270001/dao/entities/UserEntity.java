@@ -3,6 +3,8 @@ package com.ysoriazabou.iso270001.dao.entities;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -48,6 +50,7 @@ public class UserEntity {
 
     @JsonIgnore
     @OneToMany (mappedBy="client", fetch=FetchType.LAZY )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ToString.Exclude
     private List<ProjectEntity> projectsList;
 
@@ -55,11 +58,12 @@ public class UserEntity {
     @OneToMany (mappedBy="user", fetch=FetchType.LAZY )
     @ToString.Exclude
     private List<Member> membersList;
-
-   @JsonIgnore
+    @JsonIgnore
     @OneToMany (mappedBy="user", fetch=FetchType.LAZY )
     @ToString.Exclude
     private List<Notification> notificationsList;
+
+
 
 
 }

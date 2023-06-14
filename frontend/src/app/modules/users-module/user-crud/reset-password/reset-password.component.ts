@@ -38,6 +38,16 @@ export class ResetPasswordComponent implements OnInit {
 plaintext: any;
   saltedpassword : any;
 static hashedPassword: any;
+
+static userName: string = '';
+
+userNameHandler(){
+  let data: any;
+  this.service.getById(this.idx,"user").subscribe(res => {
+data=res;
+ResetPasswordComponent.userName= data.name+" "+data.lastname;
+  });
+}
     ngOnInit(): void {
     if (this.data.id != '' && this.data.id != null) {
       this.loadUserData(this.data.id);
@@ -55,6 +65,7 @@ static hashedPassword: any;
               this.saltedpassword = salt.substring(0,8) + ResetPasswordComponent.hashedPassword+salt.substring(8,16)
     }, 100);
     }
+      this.userNameHandler();
   }
  resetPassword() {
       setTimeout(() => {
@@ -62,6 +73,20 @@ static hashedPassword: any;
      this.message = "Password reset successfully. New password is: " + this.plaintext;
      this._shownButon=false;
      this.msg="ok";
+     let notification={
+        message: sessionStorage.getItem('userFullName') +' did a reset password for : '+ ResetPasswordComponent.userName,
+        date: new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay(),
+        type: 'admin',
+        operation: 'other',
+        affectedTable: 'user',
+        user :{
+          idu: sessionStorage.getItem('idu'),
+        }
+      }
+      console.log(notification);
+      this.service.add(notification, "notification").subscribe(() => {
+
+      });
    });
   }, 200);
     }

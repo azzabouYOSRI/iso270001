@@ -5,6 +5,7 @@ import {HttpService} from "../../../../utilities/service/http/http.service";
 import {OperationsService} from "../../../../utilities/service/operations/operations.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {InserteduserComponent} from "./inserteduser/inserteduser.component";
+import {MatSelectChange} from "@angular/material/select";
 
 @Component({
   selector: 'app-register',
@@ -20,7 +21,7 @@ export class RegisterComponent {
     protected operations: OperationsService,
   ) {}
 
-  typeOfUser=['admin','employee','customer','customerUser'];
+  typeOfUser=['admin','employee','customer','customer user'];
   userForm = this.builder.group({
     phone: this.builder.control('', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(13)])),
     name: this.builder.control('', Validators.required),
@@ -44,6 +45,7 @@ export class RegisterComponent {
 }
  formValue: any;
    static hashedPassword: any;
+  isCustomer: boolean =false;
   proceedSave() {
 
     let saltedpassword;
@@ -57,12 +59,28 @@ export class RegisterComponent {
         RegisterComponent.hashedPassword = result
       });
       setTimeout(() => {
+        if(this.formValue['typeOfUser']==='customer user'){
+          this.formValue['typeOfUser']='customerUser';
+        }
       saltedpassword = salt.substring(0, 8) + RegisterComponent.hashedPassword + salt.substring(8, 16);
       this.formValue['password'] = saltedpassword;
       this.service.add(this.formValue, "user").subscribe(() => {
         this.toastr.success('Saved successfully.');
         this.formValue['password'] = plaintext;
         this.operations.openDialog(1000, 600, this.formValue, InserteduserComponent);
+      });
+      let notification={
+        message: sessionStorage.getItem('userFullName') +' added user with the name : '+this.formValue['name']+' '+this.formValue['lastname'],
+        date: new Date().getFullYear()+"-"+(new Date().getMonth())+"-"+new Date().getDay(),
+        type: 'admin',
+        operation: 'add',
+        affectedTable: 'user',
+        user :{
+          idu: sessionStorage.getItem('idu'),
+        }
+      }
+      this.service.add(notification, "notification").subscribe(() => {
+
       });
       }, 100);
     } else {
@@ -76,4 +94,12 @@ export class RegisterComponent {
   });
 }
 
+  onOptionSelected($event: MatSelectChange) {
+    if ($event.value === 'customer' || $event.value === 'customer user') {
+      this.isCustomer = true;
+    }
+    else {
+      this.isCustomer = false;
+    }
+  }
 }

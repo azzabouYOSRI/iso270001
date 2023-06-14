@@ -43,6 +43,7 @@ export class NewProjectComponent implements OnInit {
   project: any;
   protected idx: number = 0;
   private budget: number = 0;
+  private companyNames2: string[] = [];
 
   constructor(
     protected builder: FormBuilder,
@@ -65,7 +66,7 @@ export class NewProjectComponent implements OnInit {
   ngOnInit(): void {
     this.populateCompanyNames();
     setTimeout(() => {
-      this.companyNames = this.operations.removeDuplicates(this.companyNames);
+      this.companyNames = this.operations.removeDuplicates(this.companyNames2);
     }, 1000);
   }
 
@@ -116,7 +117,7 @@ export class NewProjectComponent implements OnInit {
     // this.operations.openDialog(1000, 600, this.formValue, ProjectDetailsComponent)
   }
 
-  populateCompanyNames(): string[] {
+  populateCompanyNames(){
     this.service.getAll("user").subscribe(res => {
       NewProjectComponent.user = res;
       if (NewProjectComponent.user) {
@@ -125,10 +126,13 @@ export class NewProjectComponent implements OnInit {
             companyName: null | undefined;
           }) => u.companyName !== null && u.companyName !== undefined) // filter out null or undefined values
           .map((u: { companyName: any; }) => u.companyName);
+
+        for (const el of NewProjectComponent.user) {
+            this.companyNames2.push(el.companyName);
+            console.log(el.companyName)
+        }
       }
     });
-
-    return this.companyNames
   }
 
   onOptionSelected($event: MatSelectChange) {
